@@ -23,6 +23,16 @@ public class PlayState extends State {
 	private OrthographicCamera debugCamera;
 	private boolean debug = false;
 
+        /**
+         * The player score
+         */
+        private int score;
+        
+        /**
+         * Lives left until game over
+         */
+        private int playerLives;
+        
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -33,7 +43,9 @@ public class PlayState extends State {
 		entities = new EntityArrayList();
 		world = GameManager.getWorld();
 		b2dRenderer = new Box2DDebugRenderer();
-
+                score = 0;
+                playerLives = 3;
+                
 		createCamera();
 		createEntities();
 	}
@@ -52,9 +64,22 @@ public class PlayState extends State {
 
 	@Override
 	public void render(SpriteBatch batch) {
+            
+                /**
+                 * Set our camera
+                 */
 		batch.setProjectionMatrix(camera.combined);
+                
+                /**
+                 * Render all entities in our list
+                 */
 		entities.renderAll(batch);
 
+                /**
+                 * Render the players score
+                 */
+                font.draw(batch, "Score: " + score, Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
+                
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
 			b2dRenderer.render(world, debugCamera.combined);
