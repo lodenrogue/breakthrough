@@ -11,10 +11,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *
  */
 public abstract class State {
-	protected GameStateManager gameStateManager;
+	protected GameStateManager gsm;
 
 	public State(GameStateManager gsm) {
-		gameStateManager = gsm;
+		this.gsm = gsm;
 	}
 
 	/**
