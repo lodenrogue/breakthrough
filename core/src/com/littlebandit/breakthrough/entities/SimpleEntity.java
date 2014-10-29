@@ -2,6 +2,7 @@ package com.littlebandit.breakthrough.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.littlebandit.breakthrough.entities.components.Position;
 import com.littlebandit.breakthrough.entities.components.rendercomponents.RenderComponent;
 import com.littlebandit.breakthrough.entities.components.rendercomponents.SimpleRenderComponent;
@@ -20,6 +21,7 @@ public abstract class SimpleEntity implements Entity {
 	protected String id;
 	protected Position position;
 	protected Sprite sprite;
+	protected Body body;
 	protected RenderComponent renderComponent;
 	protected UpdateComponent updateComponent;
 
@@ -80,5 +82,15 @@ public abstract class SimpleEntity implements Entity {
 	@Override
 	public Sprite getSprite() {
 		return sprite;
+	}
+
+	@Override
+	public void setBody(Body body) {
+		this.body = body;
+	}
+
+	@Override
+	public Body getBody() {
+		return body;
 	}
 }

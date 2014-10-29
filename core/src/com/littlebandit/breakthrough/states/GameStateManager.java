@@ -23,8 +23,8 @@ public class GameStateManager {
 	 * 
 	 * @param sb
 	 */
-	public void render(SpriteBatch sb) {
-		states.peek().updateAndRender(sb);
+	public void render(SpriteBatch batch) {
+		states.peek().updateAndRender(batch);
 	}
 
 	/**
