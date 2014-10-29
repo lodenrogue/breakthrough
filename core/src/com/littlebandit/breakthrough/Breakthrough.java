@@ -12,7 +12,7 @@ public class Breakthrough extends ApplicationAdapter {
 	public static final int VIRTUAL_WIDTH = 600;
 	public static final int VIRTUAL_HEIGHT = 800;
 	public static final String TITLE = "Breakthrough";
-	public static FitViewport VIEWPORT;
+	public static FitViewport viewport;
 
 	private SpriteBatch batch;
 	private GameStateManager gsm;
@@ -20,14 +20,14 @@ public class Breakthrough extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		VIEWPORT = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		gsm = new GameStateManager();
 		gsm.popAndPush(new PlayState(gsm));
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		VIEWPORT.update(width, height);
+		viewport.update(width, height);
 	}
 
 	@Override
