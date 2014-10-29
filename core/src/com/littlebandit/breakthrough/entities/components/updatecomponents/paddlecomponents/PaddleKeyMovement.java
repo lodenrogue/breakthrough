@@ -18,14 +18,14 @@ public class PaddleKeyMovement implements UpdateComponent {
 		float bodyY = entity.getBody().getPosition().y;
 		float bodyAngle = entity.getBody().getAngle();
 
-		if (leftX <= 0) {
-			float x = entity.getSprite().getWidth() / 2 / ppm;
+		if (leftX <= 2) {
+			float x = ((entity.getSprite().getWidth() / 2) + 2) / ppm;
 			entity.getBody().setTransform(x, bodyY, bodyAngle);
 			canMoveLeft = false;
 
 		}
-		else if (rightX >= Gdx.graphics.getWidth()) {
-			float x = (Gdx.graphics.getWidth() - entity.getSprite().getWidth() / 2) / ppm;
+		else if (rightX >= Breakthrough.VIRTUAL_WIDTH) {
+			float x = (Breakthrough.VIRTUAL_WIDTH - entity.getSprite().getWidth() / 2) / ppm;
 			entity.getBody().setTransform(x, bodyY, bodyAngle);
 			canMoveRight = false;
 		}
