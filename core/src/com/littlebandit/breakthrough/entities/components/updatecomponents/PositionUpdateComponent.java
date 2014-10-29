@@ -1,6 +1,7 @@
 package com.littlebandit.breakthrough.entities.components.updatecomponents;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
@@ -21,6 +22,7 @@ public class PositionUpdateComponent implements UpdateComponent {
 
 		entity.getPosition().setX(x);
 		entity.getPosition().setY(y);
+		sprite.setRotation(MathUtils.radiansToDegrees * body.getAngle());
 		sprite.setPosition(x, y);
 
 	}

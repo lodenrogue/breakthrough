@@ -39,5 +39,7 @@ public interface Entity {
 	public void setBody(Body body);
 	
 	public Body getBody();
+	
+	public void dispose();
 
 }

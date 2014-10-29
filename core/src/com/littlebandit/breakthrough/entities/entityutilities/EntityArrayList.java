@@ -41,9 +41,9 @@ public class EntityArrayList extends Array<Entity> {
 			e.update();
 		}
 	}
-	
-	public void renderAll(SpriteBatch batch){
-		for(Entity e : this){
+
+	public void renderAll(SpriteBatch batch) {
+		for (Entity e : this) {
 			e.render(batch);
 		}
 	}
@@ -64,6 +64,16 @@ public class EntityArrayList extends Array<Entity> {
 	public void removeEntity(Entity e) {
 		removeValue(e, false);
 		entityHashMap.remove(e.getId());
+	}
+
+	/**
+	 * Calls the dispose method of all entities in this list.
+	 */
+
+	public void disposeAll() {
+		for (Entity e : this) {
+			e.dispose();
+		}
 	}
 
 	/**

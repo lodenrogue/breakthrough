@@ -4,11 +4,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.littlebandit.breakthrough.Breakthrough;
+import com.littlebandit.breakthrough.entities.Ball;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.Paddle;
-import com.littlebandit.breakthrough.entities.TestEntity;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
 public class EntityFactory {
@@ -16,11 +20,6 @@ public class EntityFactory {
 
 	private EntityFactory() {
 
-	}
-
-	public static Entity createTestEntity(String id, Sprite sprite, float x, float y) {
-		Entity e = new TestEntity(id, sprite, x, y);
-		return e;
 	}
 
 	public static Entity createPaddle(String id, Sprite sprite, float x, float y) {
@@ -38,6 +37,55 @@ public class EntityFactory {
 		return e;
 	}
 
+	public static Entity createBall(String id, Sprite sprite, float x, float y) {
+		Entity e = new Ball(id, sprite, x, y);
+
+		CircleShape shape = new CircleShape();
+		shape.setRadius(sprite.getWidth() / 2 / ppm);
+
+		Body body = GameManager.getWorld().createBody(createDynamicBody());
+		body.createFixture(createFixtureDef(shape, 0.0f, 0.0f, 1.0f));
+		body.setTransform(x / ppm, y / ppm, 0);
+		body.setLinearVelocity(-5f, -18f);
+		e.setBody(body);
+
+		shape.dispose();
+		return e;
+	}
+
+	public static void createScreenBounds() {
+		EdgeShape es = new EdgeShape();
+
+		float rightX = Breakthrough.VIRTUAL_WIDTH / ppm;
+		float leftX = 2 / ppm;
+		float topY = (Breakthrough.VIRTUAL_HEIGHT -1) / ppm;
+		float bottomY = 0;
+
+		Body body = GameManager.getWorld().createBody(createStaticBody());
+
+		// ---Right Side --- //
+		es.set(rightX, topY, rightX, bottomY);
+		body.createFixture(es, 1.0f);
+
+		// ---Left Side--- //
+		es.set(leftX, topY, leftX, bottomY);
+		body.createFixture(es, 1.0f);
+
+		// ---Top Side--- //
+		es.set(leftX, topY, rightX, topY);
+		body.createFixture(es, 1.0f);
+
+		es.dispose();
+
+	}
+
+	private static BodyDef createStaticBody() {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.StaticBody;
+
+		return bodyDef;
+	}
+
 	private static BodyDef createKinematicBody() {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
@@ -45,15 +93,21 @@ public class EntityFactory {
 		return bodyDef;
 	}
 
-	// private static FixtureDef createFixtureDef(Shape shape, float
-	// density, float friction, float restitution) {
-	// FixtureDef fixtureDef = new FixtureDef();
-	// fixtureDef.shape = shape;
-	// fixtureDef.density = density;
-	// fixtureDef.friction = friction;
-	// fixtureDef.restitution = restitution;
-	//
-	// return fixtureDef;
-	// }
+	private static BodyDef createDynamicBody() {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+
+		return bodyDef;
+	}
+
+	private static FixtureDef createFixtureDef(Shape shape, float density, float friction, float restitution) {
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = density;
+		fixtureDef.friction = friction;
+		fixtureDef.restitution = restitution;
+
+		return fixtureDef;
+	}
 
 }

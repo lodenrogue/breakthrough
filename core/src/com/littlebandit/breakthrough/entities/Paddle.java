@@ -10,4 +10,10 @@ public class Paddle extends SimpleEntity {
 		setUpdateComponent(new PaddleUpdateComponent());
 	}
 
+	@Override
+	public void disposeAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -21,6 +21,7 @@ public class PlayState extends State {
 	private World world;
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
+	private boolean debug = false;
 
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -43,7 +44,9 @@ public class PlayState extends State {
 
 		world.step(1 / 60f, 6, 3);
 		camera.update();
-		debugCamera.update();
+		if (debug) {
+			debugCamera.update();
+		}
 
 	}
 
@@ -52,13 +55,16 @@ public class PlayState extends State {
 		batch.setProjectionMatrix(camera.combined);
 		entities.renderAll(batch);
 
-		 batch.setProjectionMatrix(debugCamera.combined);
-		 b2dRenderer.render(world, debugCamera.combined);
+		if (debug) {
+			batch.setProjectionMatrix(debugCamera.combined);
+			b2dRenderer.render(world, debugCamera.combined);
+		}
 	}
 
 	@Override
 	public void dispose() {
 		font.dispose();
+		entities.disposeAll();
 
 	}
 
@@ -75,11 +81,22 @@ public class PlayState extends State {
 
 	private void createEntities() {
 		createPaddle();
+		createBall();
+		createScreenBounds();
 	}
 
 	private void createPaddle() {
 		Sprite sprite = new Sprite(new Texture(Gdx.files.internal("paddle.png")));
 		entities.add(EntityFactory.createPaddle("paddle", sprite, Breakthrough.VIRTUAL_WIDTH / 2, 40));
+	}
+
+	private void createBall() {
+		Sprite sprite = new Sprite(new Texture(Gdx.files.internal("ball.png")));
+		entities.add(EntityFactory.createBall("ball", sprite, Breakthrough.VIRTUAL_WIDTH / 2, 100));
+	}
+
+	private void createScreenBounds() {
+		EntityFactory.createScreenBounds();
 	}
 
 }

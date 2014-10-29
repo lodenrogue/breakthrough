@@ -8,4 +8,10 @@ public class TestEntity extends SimpleEntity {
 		super(id, sprite, x, y);
 	}
 
+	@Override
+	public void disposeAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

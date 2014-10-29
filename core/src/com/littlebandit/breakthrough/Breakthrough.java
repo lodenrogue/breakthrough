@@ -12,9 +12,9 @@ import com.littlebandit.breakthrough.states.GameStateManager;
 import com.littlebandit.breakthrough.states.PlayState;
 
 public class Breakthrough extends ApplicationAdapter {
-	public static final int VIRTUAL_WIDTH = 400;
-	public static final int VIRTUAL_HEIGHT = 600;
-	public static final float PIXELS_PER_METER = 10f;
+	public static final int VIRTUAL_WIDTH = 360;
+	public static final int VIRTUAL_HEIGHT = 640;
+	public static final float PIXELS_PER_METER = 15f;
 	public static final String TITLE = "Breakthrough";
 	public static FitViewport viewport;
 
