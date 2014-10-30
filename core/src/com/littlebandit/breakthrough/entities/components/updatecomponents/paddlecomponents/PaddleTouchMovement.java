@@ -5,12 +5,15 @@ import com.badlogic.gdx.math.Vector3;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
 public class PaddleTouchMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
+
 	private float ppm = Breakthrough.PIXELS_PER_METER;
+	private float velocity = BallVelocity.maxVelocity * 0.8f;
 
 	@Override
 	public void update(Entity entity) {
@@ -41,10 +44,10 @@ public class PaddleTouchMovement implements UpdateComponent {
 		float cameraX = GameManager.getCamera().position.x;
 
 		if (touchPos.x > cameraX && canMoveRight) {
-			entity.getBody().setLinearVelocity(30, 0);
+			entity.getBody().setLinearVelocity(velocity, 0);
 		}
 		else if (touchPos.x < cameraX && canMoveLeft) {
-			entity.getBody().setLinearVelocity(-30, 0);
+			entity.getBody().setLinearVelocity(-velocity, 0);
 		}
 		else {
 			entity.getBody().setLinearVelocity(0, 0);

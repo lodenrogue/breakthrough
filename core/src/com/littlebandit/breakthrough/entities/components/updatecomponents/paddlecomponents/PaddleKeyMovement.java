@@ -5,11 +5,14 @@ import com.badlogic.gdx.Input;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 
 public class PaddleKeyMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
+
 	private float ppm = Breakthrough.PIXELS_PER_METER;
+	private float velocity = BallVelocity.maxVelocity * 0.8f;
 
 	@Override
 	public void update(Entity entity) {
@@ -40,10 +43,10 @@ public class PaddleKeyMovement implements UpdateComponent {
 		boolean moveLeft = keyLeft && !keyRight;
 
 		if (moveRight && canMoveRight) {
-			entity.getBody().setLinearVelocity(30, 0);
+			entity.getBody().setLinearVelocity(velocity, 0);
 		}
 		else if (moveLeft && canMoveLeft) {
-			entity.getBody().setLinearVelocity(-30, 0);
+			entity.getBody().setLinearVelocity(-velocity, 0);
 		}
 		else {
 			entity.getBody().setLinearVelocity(0, 0);

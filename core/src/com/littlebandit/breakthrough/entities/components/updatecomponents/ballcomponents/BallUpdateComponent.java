@@ -6,10 +6,14 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
 
 public class BallUpdateComponent implements UpdateComponent {
 	private UpdateComponent position = new PositionUpdateComponent();
-	
+	private UpdateComponent bounds = new BallBounds();
+	private UpdateComponent velocity = new BallVelocity();
+
 	@Override
 	public void update(Entity entity) {
 		position.update(entity);
+		bounds.update(entity);
+		velocity.update(entity);
 
 	}
 

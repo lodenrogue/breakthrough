@@ -13,6 +13,7 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Ball;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.Paddle;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
 public class EntityFactory {
@@ -44,9 +45,9 @@ public class EntityFactory {
 		shape.setRadius(sprite.getWidth() / 2 / ppm);
 
 		Body body = GameManager.getWorld().createBody(createDynamicBody());
-		body.createFixture(createFixtureDef(shape, 0.0f, 0.0f, 1.0f));
+		body.createFixture(createFixtureDef(shape, 1.0f, 0.0f, 1.0f));
 		body.setTransform(x / ppm, y / ppm, 0);
-		body.setLinearVelocity(-5f, -18f);
+		body.setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 		e.setBody(body);
 
 		shape.dispose();
@@ -58,7 +59,7 @@ public class EntityFactory {
 
 		float rightX = Breakthrough.VIRTUAL_WIDTH / ppm;
 		float leftX = 2 / ppm;
-		float topY = (Breakthrough.VIRTUAL_HEIGHT -1) / ppm;
+		float topY = (Breakthrough.VIRTUAL_HEIGHT - 1) / ppm;
 		float bottomY = 0;
 
 		Body body = GameManager.getWorld().createBody(createStaticBody());
@@ -109,5 +110,4 @@ public class EntityFactory {
 
 		return fixtureDef;
 	}
-
 }

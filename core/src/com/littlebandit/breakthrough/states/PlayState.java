@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
+import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
 public class PlayState extends State {
@@ -21,18 +22,8 @@ public class PlayState extends State {
 	private World world;
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
-	private boolean debug = false;
+	private boolean debug = true;
 
-        /**
-         * The player score
-         */
-        private int score;
-        
-        /**
-         * Lives left until game over
-         */
-        private int playerLives;
-        
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -43,9 +34,7 @@ public class PlayState extends State {
 		entities = new EntityArrayList();
 		world = GameManager.getWorld();
 		b2dRenderer = new Box2DDebugRenderer();
-                score = 0;
-                playerLives = 3;
-                
+
 		createCamera();
 		createEntities();
 	}
@@ -64,22 +53,15 @@ public class PlayState extends State {
 
 	@Override
 	public void render(SpriteBatch batch) {
-            
-                /**
-                 * Set our camera
-                 */
-		batch.setProjectionMatrix(camera.combined);
-                
-                /**
-                 * Render all entities in our list
-                 */
-		entities.renderAll(batch);
+//		// Set out camera
+//		batch.setProjectionMatrix(camera.combined);
+//
+//		// Render all entities in our list
+//		entities.renderAll(batch);
 
-                /**
-                 * Render the players score
-                 */
-                font.draw(batch, "Score: " + score, Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
-                
+		// Render the players score
+		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
+
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
 			b2dRenderer.render(world, debugCamera.combined);
@@ -90,9 +72,12 @@ public class PlayState extends State {
 	public void dispose() {
 		font.dispose();
 		entities.disposeAll();
-
 	}
 
+	/**
+	 * Creates the main state camera and any other debug or auxiliary
+	 * cameras.
+	 */
 	private void createCamera() {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
@@ -104,6 +89,9 @@ public class PlayState extends State {
 
 	}
 
+	/**
+	 * Creates the game game entities.
+	 */
 	private void createEntities() {
 		createPaddle();
 		createBall();
@@ -123,5 +111,4 @@ public class PlayState extends State {
 	private void createScreenBounds() {
 		EntityFactory.createScreenBounds();
 	}
-
 }
