@@ -6,6 +6,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 
+/**
+ * Update component implementation. Sets the position and sprite location and
+ * rotation for the owner entity.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class PositionUpdateComponent implements UpdateComponent {
 	private Body body;
 	private float ppm = Breakthrough.PIXELS_PER_METER;

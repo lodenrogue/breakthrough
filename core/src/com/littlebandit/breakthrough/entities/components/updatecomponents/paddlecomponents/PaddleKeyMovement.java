@@ -16,6 +16,11 @@ public class PaddleKeyMovement implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
+		/*
+		 * Check if the paddle is at the edge of the screen left and
+		 * right bounds. Reset the position appropriately.
+		 */
+
 		float leftX = entity.getPosition().getX();
 		float rightX = leftX + entity.getSprite().getWidth();
 		float bodyY = entity.getBody().getPosition().y;
@@ -36,6 +41,8 @@ public class PaddleKeyMovement implements UpdateComponent {
 			canMoveLeft = true;
 			canMoveRight = true;
 		}
+
+		// Get input keys and handle movement based on the keys pressed.
 
 		boolean keyRight = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 		boolean keyLeft = Gdx.input.isKeyPressed(Input.Keys.LEFT);

@@ -4,6 +4,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.littlebandit.breakthrough.states.GameStateManager;
 
+/**
+ * Game manager utility class. Holds game objects.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class GameManager {
 	private static World world;
 	private static GameStateManager gsm;

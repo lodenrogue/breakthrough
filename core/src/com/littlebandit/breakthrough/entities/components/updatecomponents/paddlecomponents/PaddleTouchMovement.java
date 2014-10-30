@@ -8,6 +8,14 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
+/**
+ * Update component implementation. Handles paddle movement based on touch
+ * input.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class PaddleTouchMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
@@ -17,6 +25,11 @@ public class PaddleTouchMovement implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
+		/*
+		 * Check if the paddle is at the edge of the screen left and
+		 * right bounds. Reset the position appropriately.
+		 */
+
 		float leftX = entity.getPosition().getX();
 		float rightX = leftX + entity.getSprite().getWidth();
 		float bodyY = entity.getBody().getPosition().y;
@@ -38,6 +51,11 @@ public class PaddleTouchMovement implements UpdateComponent {
 			canMoveRight = true;
 		}
 
+		/*
+		 * Get touch position and handle movement based on the x
+		 * position of the input.
+		 */
+
 		Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		GameManager.getCamera().unproject(touchPos);
 
@@ -52,7 +70,5 @@ public class PaddleTouchMovement implements UpdateComponent {
 		else {
 			entity.getBody().setLinearVelocity(0, 0);
 		}
-
 	}
-
 }

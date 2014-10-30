@@ -5,7 +5,8 @@ import java.util.Stack;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Manager for game states.
+ * Manager for game states. Handles states in a stack-like data structure. Used
+ * to push and pop game states and handle render and dispose calls.
  * 
  * @author Miguel Hernandez
  *
@@ -15,7 +16,7 @@ public class GameStateManager {
 	private Stack<State> states;
 
 	public GameStateManager() {
-		states = new Stack<>();
+		states = new Stack<State>();
 	}
 
 	/**

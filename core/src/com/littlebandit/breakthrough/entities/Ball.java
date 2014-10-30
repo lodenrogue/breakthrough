@@ -3,6 +3,13 @@ package com.littlebandit.breakthrough.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallUpdateComponent;
 
+/**
+ * Ball Entity.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class Ball extends SimpleEntity {
 
 	public Ball(String id, Sprite sprite, float x, float y) {
@@ -13,7 +20,7 @@ public class Ball extends SimpleEntity {
 	@Override
 	public void disposeAll() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

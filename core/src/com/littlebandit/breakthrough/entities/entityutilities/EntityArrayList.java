@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.entities.Entity;
 
 /**
- * ArrayList extension. Contains capabilities to call entity update methods and
+ * Array extension. Contains capabilities to call entity render and update methods and
  * search/return entities by id.
  * 
  * @author Miguel Hernandez

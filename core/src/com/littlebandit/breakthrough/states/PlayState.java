@@ -14,6 +14,13 @@ import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
+/**
+ * Main game play state.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class PlayState extends State {
 	private BitmapFont font;
 	private OrthographicCamera camera;
@@ -22,7 +29,7 @@ public class PlayState extends State {
 	private World world;
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
-	private boolean debug = true;
+	private boolean debug = false;
 
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -53,11 +60,11 @@ public class PlayState extends State {
 
 	@Override
 	public void render(SpriteBatch batch) {
-//		// Set out camera
-//		batch.setProjectionMatrix(camera.combined);
-//
-//		// Render all entities in our list
-//		entities.renderAll(batch);
+		// Set out camera
+		batch.setProjectionMatrix(camera.combined);
+
+		// Render all entities in our list
+		entities.renderAll(batch);
 
 		// Render the players score
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);

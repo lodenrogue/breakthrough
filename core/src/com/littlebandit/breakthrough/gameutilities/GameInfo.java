@@ -1,5 +1,12 @@
 package com.littlebandit.breakthrough.gameutilities;
 
+/**
+ * Game information utility class. Holds game variables.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class GameInfo {
 	private static int score = 0;
 	private static int playerLives = 3;

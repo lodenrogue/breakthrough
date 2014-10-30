@@ -3,6 +3,16 @@ package com.littlebandit.breakthrough.entities.components.updatecomponents.ballc
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 
+/**
+ * Update component implementation. Holds the values for maximum and minimum
+ * velocity of the Ball entity. Checks if the Ball entity's body has a linear
+ * velocity exceeding the maximum velocity and resets it's linear velocity
+ * appropriately.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class BallVelocity implements UpdateComponent {
 	public static float maxVelocity = 30f;
 	public static float minVelocity = 8f;

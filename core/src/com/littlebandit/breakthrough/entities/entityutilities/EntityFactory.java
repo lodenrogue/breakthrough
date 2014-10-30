@@ -16,6 +16,13 @@ import com.littlebandit.breakthrough.entities.Paddle;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
+/**
+ * Entity factory. Used to create instances of game entities.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
+
 public class EntityFactory {
 	private static float ppm = Breakthrough.PIXELS_PER_METER;
 
