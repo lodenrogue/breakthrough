@@ -1,6 +1,7 @@
 package com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Peripheral;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 
@@ -12,20 +13,24 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
  */
 
 public class PaddleMovement implements UpdateComponent {
+	private UpdateComponent movement;
 	private UpdateComponent touchMovement = new PaddleTouchMovement();
 	private UpdateComponent keyMovement = new PaddleKeyMovement();
+	private UpdateComponent accelerometerMovement = new PaddleAccelerometerMovement();
 
 	@Override
 	public void update(Entity entity) {
-		// Check if touch input is detected and either update touch or
-		// key movement.
-		
-		if (Gdx.input.isTouched()) {
-			touchMovement.update(entity);
+		if (Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer)) {
+			movement = accelerometerMovement;
+		}
+		else if (Gdx.input.isTouched(0)) {
+			movement = touchMovement;
 		}
 		else {
-			keyMovement.update(entity);
+			movement = keyMovement;
 		}
+
+		movement.update(entity);
 
 	}
 

@@ -68,6 +68,7 @@ public class PlayState extends State {
 
 		// Render the players score
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
+		font.draw(batch, "Debug Mode. Press 'R' to reset positions.", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 50f);
 
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
@@ -103,6 +104,7 @@ public class PlayState extends State {
 		createPaddle();
 		createBall();
 		createScreenBounds();
+		createBlocks();
 	}
 
 	private void createPaddle() {
@@ -113,6 +115,22 @@ public class PlayState extends State {
 	private void createBall() {
 		Sprite sprite = new Sprite(new Texture(Gdx.files.internal("ball.png")));
 		entities.add(EntityFactory.createBall("ball", sprite, Breakthrough.VIRTUAL_WIDTH / 2, 100));
+	}
+
+	private void createBlocks() {
+		Texture block = new Texture(Gdx.files.internal("block.png"));
+		float x = 200;
+		float y = 200;
+		for (int i = 0; i < 3; i++) {
+			y = 200;
+			for (int j = 0; j < 3; j++) {
+				Sprite sprite = new Sprite(block);
+				entities.add(EntityFactory.createBlock("block", sprite, x, y));
+				y += block.getHeight() + 10f;
+			}
+			x += block.getWidth() + 10f;
+		}
+
 	}
 
 	private void createScreenBounds() {

@@ -41,5 +41,7 @@ public interface Entity {
 	public Body getBody();
 	
 	public void dispose();
+	
+	public Position getResetPosition();
 
 }

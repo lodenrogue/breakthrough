@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.littlebandit.breakthrough.entities.components.Position;
 import com.littlebandit.breakthrough.entities.components.rendercomponents.RenderComponent;
 import com.littlebandit.breakthrough.entities.components.rendercomponents.SimpleRenderComponent;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.EmptyUpdateComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.PositionUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
 
@@ -21,6 +21,7 @@ import com.littlebandit.breakthrough.gameutilities.GameManager;
 public abstract class SimpleEntity implements Entity {
 	protected String id;
 	protected Position position;
+	protected Position resetPostion;
 	protected Sprite sprite;
 	protected Body body;
 	protected RenderComponent renderComponent;
@@ -29,8 +30,9 @@ public abstract class SimpleEntity implements Entity {
 	public SimpleEntity(String id, Sprite sprite, float x, float y) {
 		this.id = id;
 		position = new Position();
+		resetPostion = new Position();
 		setPosition(x, y);
-		setUpdateComponent(new EmptyUpdateComponent());
+		setUpdateComponent(new PositionUpdateComponent());
 		setRenderComponent(new SimpleRenderComponent());
 		setSprite(sprite);
 	}
@@ -76,6 +78,11 @@ public abstract class SimpleEntity implements Entity {
 	}
 
 	@Override
+	public Position getResetPosition() {
+		return resetPostion;
+	}
+
+	@Override
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
 	}
@@ -88,19 +95,21 @@ public abstract class SimpleEntity implements Entity {
 	@Override
 	public void setBody(Body body) {
 		this.body = body;
+		resetPostion.setPosition(body.getPosition().x, body.getPosition().y);
 	}
 
 	@Override
 	public Body getBody() {
 		return body;
 	}
-	
+
 	@Override
-	public final void dispose(){
+	public final void dispose() {
 		sprite.getTexture().dispose();
 		GameManager.getWorld().destroyBody(body);
 		disposeAll();
 	}
-	
+
 	public abstract void disposeAll();
+
 }

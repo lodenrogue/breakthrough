@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Ball;
+import com.littlebandit.breakthrough.entities.Block;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.Paddle;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
@@ -30,6 +31,22 @@ public class EntityFactory {
 
 	}
 
+	public static Entity createBall(String id, Sprite sprite, float x, float y) {
+		Entity e = new Ball(id, sprite, x, y);
+
+		CircleShape shape = new CircleShape();
+		shape.setRadius(sprite.getWidth() / 2 / ppm);
+
+		Body body = GameManager.getWorld().createBody(createDynamicBody());
+		body.createFixture(createFixtureDef(shape, 1.0f, 0.0f, 1.0f));
+		body.setTransform(x / ppm, y / ppm, 0);
+		body.setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
+		e.setBody(body);
+
+		shape.dispose();
+		return e;
+	}
+
 	public static Entity createPaddle(String id, Sprite sprite, float x, float y) {
 		Entity e = new Paddle(id, sprite, x, y);
 
@@ -45,18 +62,19 @@ public class EntityFactory {
 		return e;
 	}
 
-	public static Entity createBall(String id, Sprite sprite, float x, float y) {
-		Entity e = new Ball(id, sprite, x, y);
+	public static Entity createBlock(String id, Sprite sprite, float x, float y) {
+		Entity e = new Block(id, sprite, x, y);
 
-		CircleShape shape = new CircleShape();
-		shape.setRadius(sprite.getWidth() / 2 / ppm);
-
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
+		
 		Body body = GameManager.getWorld().createBody(createDynamicBody());
 		body.createFixture(createFixtureDef(shape, 1.0f, 0.0f, 1.0f));
+		body.setAngularDamping(1f);
+		body.setLinearDamping(0.3f);
 		body.setTransform(x / ppm, y / ppm, 0);
-		body.setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 		e.setBody(body);
-
+		
 		shape.dispose();
 		return e;
 	}

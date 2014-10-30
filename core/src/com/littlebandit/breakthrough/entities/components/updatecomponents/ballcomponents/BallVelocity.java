@@ -7,7 +7,8 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
  * Update component implementation. Holds the values for maximum and minimum
  * velocity of the Ball entity. Checks if the Ball entity's body has a linear
  * velocity exceeding the maximum velocity and resets it's linear velocity
- * appropriately.
+ * accordingly. Also checks if the body has a linear velocity lower than the
+ * minimum velocity and resets it's accordingly.
  * 
  * @author Miguel Hernandez
  *
@@ -15,7 +16,7 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
 
 public class BallVelocity implements UpdateComponent {
 	public static float maxVelocity = 30f;
-	public static float minVelocity = 8f;
+	public static float minVelocity = 20f;
 
 	@Override
 	public void update(Entity entity) {
@@ -37,6 +38,24 @@ public class BallVelocity implements UpdateComponent {
 			}
 			else {
 				entity.getBody().setLinearVelocity(xVelocity, maxVelocity);
+			}
+		}
+
+		if (Math.abs(xVelocity) < minVelocity) {
+			if (xVelocity < 0) {
+				entity.getBody().setLinearVelocity(-minVelocity, yVelocity);
+			}
+			else if (xVelocity > 0) {
+				entity.getBody().setLinearVelocity(minVelocity, yVelocity);
+			}
+		}
+
+		if (Math.abs(yVelocity) < minVelocity) {
+			if (yVelocity < 0) {
+				entity.getBody().setLinearVelocity(xVelocity, -minVelocity);
+			}
+			else if (yVelocity > 0) {
+				entity.getBody().setLinearVelocity(xVelocity, minVelocity);
 			}
 		}
 	}

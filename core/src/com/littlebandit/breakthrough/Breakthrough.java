@@ -47,7 +47,11 @@ public class Breakthrough extends ApplicationAdapter {
 		batch.begin();
 		gsm.render(batch);
 		batch.end();
-
+	}
+	
+	@Override
+	public void pause(){
+		Gdx.app.exit();
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class PaddleTouchMovement implements UpdateComponent {
 	public void update(Entity entity) {
 		/*
 		 * Check if the paddle is at the edge of the screen left and
-		 * right bounds. Reset the position appropriately.
+		 * right bounds. Reset the position accordingly.
 		 */
 
 		float leftX = entity.getPosition().getX();

@@ -1,24 +1,23 @@
 package com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 
-public class PaddleKeyMovement implements UpdateComponent {
+public class PaddleAccelerometerMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
 
 	private float ppm = Breakthrough.PIXELS_PER_METER;
-	private float velocity = BallVelocity.maxVelocity * 0.8f;
+	private float velocity = BallVelocity.maxVelocity * 4f;
 
 	@Override
 	public void update(Entity entity) {
 		/*
 		 * Check if the paddle is at the edge of the screen left and
-		 * right bounds. Reset the position accordingly.
+		 * right bounds. Reset the position appropriately.
 		 */
 
 		float leftX = entity.getPosition().getX();
@@ -42,18 +41,19 @@ public class PaddleKeyMovement implements UpdateComponent {
 			canMoveRight = true;
 		}
 
-		// Get input keys and handle movement based on the keys pressed.
+		/*
+		 * Check accelerometer y value and set linear velocity
+		 * accordingly.
+		 */
 
-		boolean keyRight = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
-		boolean keyLeft = Gdx.input.isKeyPressed(Input.Keys.LEFT);
-		boolean moveRight = keyRight && !keyLeft;
-		boolean moveLeft = keyLeft && !keyRight;
+		float newVelocity = velocity * Math.abs(Gdx.input.getAccelerometerY() / 10f);
+		newVelocity = newVelocity > velocity ? velocity : newVelocity;
 
-		if (moveRight && canMoveRight) {
-			entity.getBody().setLinearVelocity(velocity, 0);
+		if (Gdx.input.getAccelerometerY() < 0 && canMoveLeft) {
+			entity.getBody().setLinearVelocity(-newVelocity, 0);
 		}
-		else if (moveLeft && canMoveLeft) {
-			entity.getBody().setLinearVelocity(-velocity, 0);
+		else if (Gdx.input.getAccelerometerY() > 0 && canMoveRight) {
+			entity.getBody().setLinearVelocity(newVelocity, 0);
 		}
 		else {
 			entity.getBody().setLinearVelocity(0, 0);

@@ -22,7 +22,7 @@ public class BallBounds implements UpdateComponent {
 			float y = 200 / ppm;
 
 			entity.getBody().setTransform(x, y, entity.getBody().getAngle());
-			entity.getBody().setLinearVelocity(8f, 30f);
+			entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 		}
 	}
 }
