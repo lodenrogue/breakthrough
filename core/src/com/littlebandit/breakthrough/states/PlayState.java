@@ -1,18 +1,18 @@
 package com.littlebandit.breakthrough.states;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.GameManager;
+import com.littlebandit.breakthrough.gameutilities.TextureManager;
+import com.littlebandit.breakthrough.gameutilities.WorldManager;
 
 /**
  * Main game play state.
@@ -25,8 +25,6 @@ public class PlayState extends State {
 	private BitmapFont font;
 	private OrthographicCamera camera;
 	private EntityArrayList entities;
-
-	private World world;
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
 	private boolean debug = false;
@@ -39,7 +37,8 @@ public class PlayState extends State {
 	public void create() {
 		font = new BitmapFont();
 		entities = new EntityArrayList();
-		world = GameManager.getWorld();
+		GameManager.setEntityArrayList(entities);
+
 		b2dRenderer = new Box2DDebugRenderer();
 
 		createCamera();
@@ -50,7 +49,7 @@ public class PlayState extends State {
 	public void update() {
 		entities.updateAll();
 
-		world.step(1 / 60f, 6, 3);
+		WorldManager.updateWorld();
 		camera.update();
 		if (debug) {
 			debugCamera.update();
@@ -60,7 +59,7 @@ public class PlayState extends State {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		// Set out camera
+		// Set our camera
 		batch.setProjectionMatrix(camera.combined);
 
 		// Render all entities in our list
@@ -72,7 +71,7 @@ public class PlayState extends State {
 
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
-			b2dRenderer.render(world, debugCamera.combined);
+			b2dRenderer.render(WorldManager.getWorld(), debugCamera.combined);
 		}
 	}
 
@@ -105,32 +104,37 @@ public class PlayState extends State {
 		createBall();
 		createScreenBounds();
 		createBlocks();
+
 	}
 
 	private void createPaddle() {
-		Sprite sprite = new Sprite(new Texture(Gdx.files.internal("paddle.png")));
+		Sprite sprite = new Sprite(TextureManager.getTexture("paddle"));
 		entities.add(EntityFactory.createPaddle("paddle", sprite, Breakthrough.VIRTUAL_WIDTH / 2, 40));
 	}
 
 	private void createBall() {
-		Sprite sprite = new Sprite(new Texture(Gdx.files.internal("ball.png")));
+		Sprite sprite = new Sprite(TextureManager.getTexture("ball"));
 		entities.add(EntityFactory.createBall("ball", sprite, Breakthrough.VIRTUAL_WIDTH / 2, 100));
 	}
 
 	private void createBlocks() {
-		Texture block = new Texture(Gdx.files.internal("block.png"));
-		float x = 200;
-		float y = 200;
-		for (int i = 0; i < 3; i++) {
-			y = 200;
-			for (int j = 0; j < 3; j++) {
+		Texture block = TextureManager.getTexture("block");
+
+		float x = 100;
+		float y = 0;
+		int idNumber = 0;
+
+		for (int i = 0; i < 4; i++) {
+			y = 300;
+			for (int j = 0; j < 4; j++) {
 				Sprite sprite = new Sprite(block);
-				entities.add(EntityFactory.createBlock("block", sprite, x, y));
+				entities.add(EntityFactory.createBlock("block" + idNumber, sprite, x, y));
+				idNumber++;
+
 				y += block.getHeight() + 10f;
 			}
 			x += block.getWidth() + 10f;
 		}
-
 	}
 
 	private void createScreenBounds() {

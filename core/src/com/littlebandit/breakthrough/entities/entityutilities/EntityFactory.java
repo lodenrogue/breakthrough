@@ -15,7 +15,7 @@ import com.littlebandit.breakthrough.entities.Block;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.Paddle;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
-import com.littlebandit.breakthrough.gameutilities.GameManager;
+import com.littlebandit.breakthrough.gameutilities.WorldManager;
 
 /**
  * Entity factory. Used to create instances of game entities.
@@ -37,10 +37,11 @@ public class EntityFactory {
 		CircleShape shape = new CircleShape();
 		shape.setRadius(sprite.getWidth() / 2 / ppm);
 
-		Body body = GameManager.getWorld().createBody(createDynamicBody());
+		Body body = WorldManager.getWorld().createBody(createDynamicBody());
 		body.createFixture(createFixtureDef(shape, 1.0f, 0.0f, 1.0f));
 		body.setTransform(x / ppm, y / ppm, 0);
 		body.setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
+		body.setUserData(id);
 		e.setBody(body);
 
 		shape.dispose();
@@ -53,9 +54,10 @@ public class EntityFactory {
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
 
-		Body body = GameManager.getWorld().createBody(createKinematicBody());
+		Body body = WorldManager.getWorld().createBody(createKinematicBody());
 		body.createFixture(shape, 1.0f);
 		body.setTransform(x / ppm, y / ppm, 0);
+		body.setUserData(id);
 		e.setBody(body);
 
 		shape.dispose();
@@ -67,14 +69,13 @@ public class EntityFactory {
 
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
-		
-		Body body = GameManager.getWorld().createBody(createDynamicBody());
-		body.createFixture(createFixtureDef(shape, 1.0f, 0.0f, 1.0f));
-		body.setAngularDamping(1f);
-		body.setLinearDamping(0.3f);
+
+		Body body = WorldManager.getWorld().createBody(createStaticBody());
+		body.createFixture(shape, 1.0f);
 		body.setTransform(x / ppm, y / ppm, 0);
+		body.setUserData(id);
 		e.setBody(body);
-		
+
 		shape.dispose();
 		return e;
 	}
@@ -87,7 +88,7 @@ public class EntityFactory {
 		float topY = (Breakthrough.VIRTUAL_HEIGHT - 1) / ppm;
 		float bottomY = 0;
 
-		Body body = GameManager.getWorld().createBody(createStaticBody());
+		Body body = WorldManager.getWorld().createBody(createStaticBody());
 
 		// ---Right Side --- //
 		es.set(rightX, topY, rightX, bottomY);

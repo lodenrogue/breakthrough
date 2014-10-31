@@ -8,7 +8,7 @@ import com.littlebandit.breakthrough.entities.components.rendercomponents.Render
 import com.littlebandit.breakthrough.entities.components.rendercomponents.SimpleRenderComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.PositionUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
-import com.littlebandit.breakthrough.gameutilities.GameManager;
+import com.littlebandit.breakthrough.gameutilities.WorldManager;
 
 /**
  * Simple entity interface implementation. This class needs to be inherited.
@@ -105,8 +105,7 @@ public abstract class SimpleEntity implements Entity {
 
 	@Override
 	public final void dispose() {
-		sprite.getTexture().dispose();
-		GameManager.getWorld().destroyBody(body);
+		WorldManager.addBodyToBeDestroyed(body);
 		disposeAll();
 	}
 

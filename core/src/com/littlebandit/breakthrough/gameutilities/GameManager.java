@@ -1,7 +1,7 @@
 package com.littlebandit.breakthrough.gameutilities;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.physics.box2d.World;
+import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.states.GameStateManager;
 
 /**
@@ -12,20 +12,20 @@ import com.littlebandit.breakthrough.states.GameStateManager;
  */
 
 public class GameManager {
-	private static World world;
 	private static GameStateManager gsm;
 	private static OrthographicCamera camera;
+	private static EntityArrayList entities;
 
 	private GameManager() {
 
 	}
-
-	public static void setWorld(World world) {
-		GameManager.world = world;
+	
+	public static void setEntityArrayList(EntityArrayList entities){
+		GameManager.entities = entities;
 	}
-
-	public static World getWorld() {
-		return world;
+	
+	public static EntityArrayList getEntityArrayList(){
+		return entities;
 	}
 
 	public static void setGameStateManager(GameStateManager gsm) {
