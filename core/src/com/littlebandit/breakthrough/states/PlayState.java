@@ -42,6 +42,10 @@ public class PlayState extends State {
 
 		b2dRenderer = new Box2DDebugRenderer();
 
+                // Make sure to reset all game info on creation
+                GameInfo.setScore(0);
+                GameInfo.setPlayerLives(3);
+                
 		createCamera();
 		createEntities();
 	}
@@ -54,6 +58,13 @@ public class PlayState extends State {
 		if (debug) {
 			debugCamera.update();
 		}
+                
+                // If we have zero lives we go to game over!
+                if (GameInfo.getPlayerLives() == 0)
+                {
+                    // GAME OVER!
+                    gsm.popAndPush(new GameOverState(gsm));
+                }
 
 	}
 
@@ -65,8 +76,10 @@ public class PlayState extends State {
 		// Render all entities in our list
 		entities.renderAll(batch);
 
-		// Render the players score
+                // Render the players score and lives
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
+		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
+                font.draw(batch, "Debug Mode. Press 'R' to reset positions.", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 50f);
 
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);

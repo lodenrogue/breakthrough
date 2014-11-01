@@ -11,7 +11,7 @@ import com.littlebandit.breakthrough.gameutilities.GameContactListener;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
-import com.littlebandit.breakthrough.states.PlayState;
+import com.littlebandit.breakthrough.states.*;
 
 public class Breakthrough extends ApplicationAdapter {
 	public static final int VIRTUAL_WIDTH = 800;
@@ -27,7 +27,7 @@ public class Breakthrough extends ApplicationAdapter {
 	@SuppressWarnings("unused")
 	private ApplicationState appState = ApplicationState.Running;
 	private SpriteBatch batch;
-	private GameStateManager gsm;
+	private static GameStateManager gsm;
 
 	@Override
 	public void create() {
@@ -39,7 +39,7 @@ public class Breakthrough extends ApplicationAdapter {
 		TextureManager.initialize();
 
 		gsm = new GameStateManager();
-		gsm.popAndPush(new PlayState(gsm));
+		gsm.popAndPush(new MenuState(gsm));
 	}
 
 	@Override
@@ -80,4 +80,13 @@ public class Breakthrough extends ApplicationAdapter {
 		gsm.dispose();
 		TextureManager.dispose();
 	}
-}
+        
+        /**
+         * Get the game state manager for this game
+         * @return This games state manager
+         */
+        public static GameStateManager GetGameStateManager()
+        {
+            return gsm;
+        }
+}  // end Breakthrough

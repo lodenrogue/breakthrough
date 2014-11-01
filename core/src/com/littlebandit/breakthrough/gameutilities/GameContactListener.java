@@ -11,12 +11,12 @@ public class GameContactListener implements ContactListener {
 
 	@Override
 	public void beginContact(Contact contact) {
+            
 		/*
 		 * Create these two String objects to check if they are null.
 		 * Some bodies may not have been assigned user data so they will
 		 * return null and throw an exception.
 		 */
-
 		String idA = (String) contact.getFixtureA().getBody().getUserData();
 		String idB = (String) contact.getFixtureB().getBody().getUserData();
 
