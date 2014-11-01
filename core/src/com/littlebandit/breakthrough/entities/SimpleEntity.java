@@ -8,6 +8,7 @@ import com.littlebandit.breakthrough.entities.components.rendercomponents.Render
 import com.littlebandit.breakthrough.entities.components.rendercomponents.SimpleRenderComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.PositionUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 
 /**
@@ -24,11 +25,13 @@ public abstract class SimpleEntity implements Entity {
 	protected Position resetPostion;
 	protected Sprite sprite;
 	protected Body body;
+	protected boolean isColliding;
 	protected RenderComponent renderComponent;
 	protected UpdateComponent updateComponent;
 
 	public SimpleEntity(String id, Sprite sprite, float x, float y) {
 		this.id = id;
+		isColliding = false;
 		position = new Position();
 		resetPostion = new Position();
 		setPosition(x, y);
@@ -104,7 +107,18 @@ public abstract class SimpleEntity implements Entity {
 	}
 
 	@Override
+	public void setIsColliding(boolean isColliding) {
+		this.isColliding = isColliding;
+	}
+
+	@Override
+	public boolean isColliding() {
+		return isColliding;
+	}
+
+	@Override
 	public final void dispose() {
+		GameManager.getEntityArrayList().removeEntity(this);
 		WorldManager.addBodyToBeDestroyed(body);
 		disposeAll();
 	}

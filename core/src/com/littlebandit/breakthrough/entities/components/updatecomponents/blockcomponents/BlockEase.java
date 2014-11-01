@@ -9,7 +9,7 @@ import com.littlebandit.breakthrough.gameutilities.math.easestrategies.CircStrat
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseStrategy;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticStrategy;
 
-public class BlockEaseComponent implements UpdateComponent {
+public class BlockEase implements UpdateComponent {
 	private float ppm = Breakthrough.PIXELS_PER_METER;
 	private float scaleTime = 0;
 	private float scaleBeginValue = 0;
@@ -24,10 +24,10 @@ public class BlockEaseComponent implements UpdateComponent {
 	// //////////////////////////
 	private EaseStrategy scaleStrategy = new CircStrategy();
 	private EaseStrategy dropStrategy = new ElasticStrategy();
-	
-	//scale Bounce ease in
-	//scale Circ ease in
-	//drop Elastic ease in
+
+	// scale Bounce ease in
+	// scale Circ ease in
+	// drop Elastic ease in
 
 	@Override
 	public void update(Entity entity) {

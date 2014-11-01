@@ -1,4 +1,4 @@
-package com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents;
+package com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Peripheral;

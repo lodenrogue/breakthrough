@@ -43,5 +43,9 @@ public interface Entity {
 	public void dispose();
 	
 	public Position getResetPosition();
+	
+	public void setIsColliding(boolean isColliding);
+	
+	public boolean isColliding();
 
 }

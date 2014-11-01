@@ -126,10 +126,10 @@ public class PlayState extends State {
 	 * Creates the game game entities.
 	 */
 	private void createEntities() {
-		createPaddle();
-		createBall();
 		createScreenBounds();
 		createBlocks();
+		createPaddle();
+		createBall();
 
 	}
 
