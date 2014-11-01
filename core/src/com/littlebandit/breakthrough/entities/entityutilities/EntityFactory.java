@@ -15,7 +15,7 @@ import com.littlebandit.breakthrough.entities.Block;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.Paddle;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
-import com.littlebandit.breakthrough.gameutilities.WorldManager;
+import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 
 /**
  * Entity factory. Used to create instances of game entities.

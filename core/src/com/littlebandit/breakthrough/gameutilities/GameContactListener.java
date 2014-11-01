@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.littlebandit.breakthrough.entities.Entity;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 
 public class GameContactListener implements ContactListener {
 
@@ -26,12 +27,14 @@ public class GameContactListener implements ContactListener {
 			if (playerBlock) {
 				Entity e = GameManager.getEntityArrayList().getEntityById(idB);
 				GameManager.getEntityArrayList().removeEntity(e);
+				GameInfo.addScore(100);
 				e.dispose();
 
 			}
 			else if (blockPlayer) {
 				Entity e = GameManager.getEntityArrayList().getEntityById(idA);
 				GameManager.getEntityArrayList().removeEntity(e);
+				GameInfo.addScore(100);
 				e.dispose();
 			}
 		}

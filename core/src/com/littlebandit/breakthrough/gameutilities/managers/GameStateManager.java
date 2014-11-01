@@ -1,8 +1,9 @@
-package com.littlebandit.breakthrough.states;
+package com.littlebandit.breakthrough.gameutilities.managers;
 
 import java.util.Stack;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.littlebandit.breakthrough.states.State;
 
 /**
  * Manager for game states. Handles states in a stack-like data structure. Used

@@ -1,4 +1,4 @@
-package com.littlebandit.breakthrough.gameutilities;
+package com.littlebandit.breakthrough.gameutilities.managers;
 
 import java.util.HashMap;
 

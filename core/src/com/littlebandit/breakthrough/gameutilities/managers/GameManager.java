@@ -1,8 +1,7 @@
-package com.littlebandit.breakthrough.gameutilities;
+package com.littlebandit.breakthrough.gameutilities.managers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
-import com.littlebandit.breakthrough.states.GameStateManager;
 
 /**
  * Game manager utility class. Holds game objects.
@@ -19,12 +18,12 @@ public class GameManager {
 	private GameManager() {
 
 	}
-	
-	public static void setEntityArrayList(EntityArrayList entities){
+
+	public static void setEntityArrayList(EntityArrayList entities) {
 		GameManager.entities = entities;
 	}
-	
-	public static EntityArrayList getEntityArrayList(){
+
+	public static EntityArrayList getEntityArrayList() {
 		return entities;
 	}
 

@@ -1,6 +1,7 @@
 package com.littlebandit.breakthrough.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 
 /**
  * State class offers abstract methods for derivative states to be used in a

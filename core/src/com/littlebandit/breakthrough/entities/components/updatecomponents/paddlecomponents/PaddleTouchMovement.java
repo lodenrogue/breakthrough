@@ -6,7 +6,7 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
-import com.littlebandit.breakthrough.gameutilities.GameManager;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 
 /**
  * Update component implementation. Handles paddle movement based on touch

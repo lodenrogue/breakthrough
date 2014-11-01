@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.littlebandit.breakthrough.gameutilities.GameContactListener;
-import com.littlebandit.breakthrough.gameutilities.TextureManager;
-import com.littlebandit.breakthrough.gameutilities.WorldManager;
-import com.littlebandit.breakthrough.states.GameStateManager;
+import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
+import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
+import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 import com.littlebandit.breakthrough.states.PlayState;
 
 public class Breakthrough extends ApplicationAdapter {
@@ -66,8 +66,8 @@ public class Breakthrough extends ApplicationAdapter {
 		if (Gdx.app.getType().equals(ApplicationType.Android)) {
 			Gdx.app.exit();
 		}
-		// TODO Save application state when pause is invoked and resume when
-		// resume is invoked
+		// TODO Save application state when pause is invoked and resume
+		// when resume is invoked
 	}
 
 	@Override

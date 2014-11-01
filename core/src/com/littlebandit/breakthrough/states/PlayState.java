@@ -1,7 +1,6 @@
 package com.littlebandit.breakthrough.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,9 +9,11 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
-import com.littlebandit.breakthrough.gameutilities.GameManager;
-import com.littlebandit.breakthrough.gameutilities.TextureManager;
-import com.littlebandit.breakthrough.gameutilities.WorldManager;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
+import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
+import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
+import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
+import com.littlebandit.breakthrough.gameutilities.map.MapBuilder;
 
 /**
  * Main game play state.
@@ -48,7 +49,6 @@ public class PlayState extends State {
 	@Override
 	public void update() {
 		entities.updateAll();
-
 		WorldManager.updateWorld();
 		camera.update();
 		if (debug) {
@@ -67,7 +67,6 @@ public class PlayState extends State {
 
 		// Render the players score
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
-		font.draw(batch, "Debug Mode. Press 'R' to reset positions.", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 50f);
 
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
@@ -118,23 +117,9 @@ public class PlayState extends State {
 	}
 
 	private void createBlocks() {
-		Texture block = TextureManager.getTexture("block");
-
-		float x = 100;
-		float y = 0;
-		int idNumber = 0;
-
-		for (int i = 0; i < 4; i++) {
-			y = 300;
-			for (int j = 0; j < 4; j++) {
-				Sprite sprite = new Sprite(block);
-				entities.add(EntityFactory.createBlock("block" + idNumber, sprite, x, y));
-				idNumber++;
-
-				y += block.getHeight() + 10f;
-			}
-			x += block.getWidth() + 10f;
-		}
+		float width = TextureManager.getTexture("block").getWidth();
+		float height = TextureManager.getTexture("block").getHeight();
+		MapBuilder.buildLevelMap("level1.map", entities, (0 + width / 2) + width/2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
 	}
 
 	private void createScreenBounds() {

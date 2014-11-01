@@ -8,7 +8,7 @@ import com.littlebandit.breakthrough.entities.components.rendercomponents.Render
 import com.littlebandit.breakthrough.entities.components.rendercomponents.SimpleRenderComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.PositionUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
-import com.littlebandit.breakthrough.gameutilities.WorldManager;
+import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 
 /**
  * Simple entity interface implementation. This class needs to be inherited.
