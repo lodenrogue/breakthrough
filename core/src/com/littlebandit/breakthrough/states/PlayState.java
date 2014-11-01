@@ -51,10 +51,10 @@ public class PlayState extends State {
 		entities.updateAll();
 		WorldManager.updateWorld();
 		camera.update();
+
 		if (debug) {
 			debugCamera.update();
 		}
-
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class PlayState extends State {
 	private void createBlocks() {
 		float width = TextureManager.getTexture("block").getWidth();
 		float height = TextureManager.getTexture("block").getHeight();
-		MapBuilder.buildLevelMap("level1.map", entities, (0 + width / 2) + width/2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
+		MapBuilder.buildLevelMap("level1.map", entities, (0 + width / 2) + width / 2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
 	}
 
 	private void createScreenBounds() {
