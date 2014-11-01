@@ -13,49 +13,49 @@ import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 /**
  * Game Over!
  */
-public class GameOverState extends State{
-    
-    private BitmapFont font;
-    private OrthographicCamera camera;
-    
-    public GameOverState(GameStateManager gsm) {
-        super(gsm);
-    }
+public class GameOverState extends State {
+	private BitmapFont font;
+	private OrthographicCamera camera;
 
-    @Override
-    public void create() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
-        Breakthrough.viewport.setCamera(camera);
-        GameManager.setCamera(camera);
-        font = new BitmapFont();
-    }
+	public GameOverState(GameStateManager gsm) {
+		super(gsm);
+	}
 
-    @Override
-    public void update() {
-        camera.update();
-        
-        // Wait for the player to press any key to reset the game
-        if (Gdx.input.isKeyPressed(Keys.ANY_KEY))
-        {
-            gsm.popAndPush(new PlayState(gsm));
-        }
-    }
+	@Override
+	public void create() {
+		createCamera();
+		font = new BitmapFont();
+	}
 
-    @Override
-    public void render(SpriteBatch batch) {
-        
-        // Set out camera
-        batch.setProjectionMatrix(camera.combined);
+	@Override
+	public void update() {
+		camera.update();
 
-        // Render the players score
-        font.draw(batch, "GAME OVER, Press Any Key to try again! ", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
-        font.draw(batch, "FINAL SCORE: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 40);
-    }
+		// Wait for the player to press any key to reset the game
+		if (Gdx.input.isKeyPressed(Keys.ANY_KEY) || Gdx.input.isTouched()) {
+			gsm.popAndPush(new PlayState(gsm));
+		}
+	}
 
-    @Override
-    public void dispose() {
-        font.dispose();
-    }
-    
-}  // end GameOverState
+	@Override
+	public void render(SpriteBatch batch) {
+		// Set our camera
+		batch.setProjectionMatrix(camera.combined);
+
+		// Render the players score
+		font.draw(batch, "GAME OVER, Press Any Key or Touch to try again! ", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
+		font.draw(batch, "FINAL SCORE: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 40);
+	}
+
+	@Override
+	public void dispose() {
+		font.dispose();
+	}
+
+	private void createCamera() {
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
+		Breakthrough.viewport.setCamera(camera);
+		GameManager.setCamera(camera);
+	}
+}

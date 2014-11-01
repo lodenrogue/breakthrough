@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.Gdx;
 
 public class WorldManager {
 	private static Array<Body> destroyBodyQueue = new Array<Body>();
@@ -27,11 +26,20 @@ public class WorldManager {
 		destroyBodyQueue.add(body);
 	}
 
+	/**
+	 * Handles world step method and destroying bodies in queue.
+	 */
 	public static void updateWorld() {
-		world.step(Gdx.graphics.getDeltaTime(), 6, 3);
+		// To prevent stutters on mobile devices and on some desktop PCs
+		// don't use Gdx.graphics.getDeltaTime()
+		world.step(1 / 60f, 6, 3);
 		destroyBodiesInQueue();
 	}
 
+	/**
+	 * Iterates through all bodies in destroyBodyQueue destroys them from
+	 * the world.
+	 */
 	private static void destroyBodiesInQueue() {
 		if (destroyBodyQueue.size > 0) {
 			for (Body b : destroyBodyQueue) {
@@ -39,6 +47,6 @@ public class WorldManager {
 			}
 			destroyBodyQueue.clear();
 		}
-		
+
 	}
 }

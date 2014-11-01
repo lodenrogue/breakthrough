@@ -30,6 +30,20 @@ public class GameStateManager {
 	}
 
 	/**
+	 * Called when the game is paused.
+	 */
+	public void pause() {
+		states.peek().pause();
+	}
+
+	/**
+	 * Called when the game is resumed.
+	 */
+	public void resume() {
+		states.peek().resume();
+	}
+
+	/**
 	 * If the state stack is not empty it removes the first element and puts
 	 * the passed state at the top of the stack.
 	 * 

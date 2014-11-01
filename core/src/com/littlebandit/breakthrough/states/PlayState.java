@@ -79,12 +79,17 @@ public class PlayState extends State {
                 // Render the players score and lives
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
-                font.draw(batch, "Debug Mode. Press 'R' to reset positions.", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 50f);
-
+		
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
 			b2dRenderer.render(WorldManager.getWorld(), debugCamera.combined);
 		}
+	}
+	
+	@Override
+	public void pause() {
+		gsm.pushNew(new PauseMenuState(gsm));
+		
 	}
 
 	@Override
@@ -138,4 +143,6 @@ public class PlayState extends State {
 	private void createScreenBounds() {
 		EntityFactory.createScreenBounds();
 	}
+
+	
 }

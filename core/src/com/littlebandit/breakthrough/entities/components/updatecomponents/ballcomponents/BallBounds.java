@@ -4,7 +4,6 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
-import com.littlebandit.breakthrough.states.*;
 
 /**
  * Update component implementation. Checks to see if the ball is out of bounds
@@ -15,23 +14,24 @@ import com.littlebandit.breakthrough.states.*;
  */
 
 public class BallBounds implements UpdateComponent {
-    
-        /**
-         * Pixels per meter
-         */
+
+	/**
+	 * Pixels per meter
+	 */
 	private float ppm = Breakthrough.PIXELS_PER_METER;
 
 	@Override
 	public void update(Entity entity) {
-                
-                /**
-                 * Check to see if we are out of bounds!
-                 */
+
+		/**
+		 * Check to see if we are out of bounds!
+		 */
 		if (entity.getPosition().getY() < -20) {
-                        /**
-                         * Uh oh!  This player must not be very good, subtract a life!
-                         */
-                         GameInfo.subtractPlayerLives(1);
+			/**
+			 * Uh oh! This player must not be very good, subtract a
+			 * life!
+			 */
+			GameInfo.subtractPlayerLives(1);
 
 			float x = Breakthrough.VIRTUAL_WIDTH / 2 / ppm;
 			float y = 200 / ppm;
@@ -39,7 +39,7 @@ public class BallBounds implements UpdateComponent {
 			entity.getBody().setTransform(x, y, entity.getBody().getAngle());
 			entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 		}
-                
-	}  // end update
-        
-}  // end BallBounds
+
+	}
+
+}

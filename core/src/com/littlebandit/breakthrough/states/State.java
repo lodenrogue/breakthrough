@@ -45,6 +45,14 @@ public abstract class State {
 		update();
 		render(batch);
 	}
+	
+	public void pause(){
+		
+	}
+	
+	public void resume(){
+		
+	}
 
 	/**
 	 * Called when resources need to be released. Typically, when this state

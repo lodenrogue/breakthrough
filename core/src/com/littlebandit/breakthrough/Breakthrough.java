@@ -27,7 +27,7 @@ public class Breakthrough extends ApplicationAdapter {
 	@SuppressWarnings("unused")
 	private ApplicationState appState = ApplicationState.Running;
 	private SpriteBatch batch;
-	private static GameStateManager gsm;
+	private GameStateManager gsm;
 
 	@Override
 	public void create() {
@@ -55,24 +55,21 @@ public class Breakthrough extends ApplicationAdapter {
 		batch.begin();
 		gsm.render(batch);
 		batch.end();
-
 	}
 
 	@Override
 	public void pause() {
-		appState = ApplicationState.Paused;
-		Gdx.app.log("pause", "On pause");
-
 		if (Gdx.app.getType().equals(ApplicationType.Android)) {
 			Gdx.app.exit();
 		}
-		// TODO Save application state when pause is invoked and resume
-		// when resume is invoked
+		appState = ApplicationState.Paused;
+		gsm.pause();
 	}
 
 	@Override
 	public void resume() {
 		appState = ApplicationState.Resumed;
+		gsm.resume();
 	}
 
 	@Override
@@ -80,13 +77,4 @@ public class Breakthrough extends ApplicationAdapter {
 		gsm.dispose();
 		TextureManager.dispose();
 	}
-        
-        /**
-         * Get the game state manager for this game
-         * @return This games state manager
-         */
-        public static GameStateManager GetGameStateManager()
-        {
-            return gsm;
-        }
-}  // end Breakthrough
+}
