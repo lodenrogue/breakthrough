@@ -16,6 +16,7 @@ public class BallUpdateComponent implements UpdateComponent {
 	private UpdateComponent position = new PositionUpdateComponent();
 	private UpdateComponent bounds = new BallBounds();
 	private UpdateComponent velocity = new BallVelocity();
+	private UpdateComponent startLevel = new BallStartLevel();
 	private UpdateComponent debug = new DebugUpdateComponent();
 
 	@Override
@@ -23,6 +24,7 @@ public class BallUpdateComponent implements UpdateComponent {
 		position.update(entity);
 		bounds.update(entity);
 		velocity.update(entity);
+		startLevel.update(entity);
 		debug.update(entity);
 	}
 }

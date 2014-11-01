@@ -8,10 +8,12 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
 public class BlockUpdateComponent implements UpdateComponent {
 	private UpdateComponent position = new PositionUpdateComponent();
 	private UpdateComponent debug = new DebugUpdateComponent();
+	private UpdateComponent ease = new BlockEaseComponent();
 
 	@Override
 	public void update(Entity entity) {
 		position.update(entity);
+		ease.update(entity);
 		debug.update(entity);
 
 	}

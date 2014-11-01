@@ -2,6 +2,7 @@ package com.littlebandit.breakthrough.entities.components.updatecomponents.ballc
 
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.gameutilities.GameInfo;
 
 /**
  * Update component implementation. Holds the values for maximum and minimum
@@ -20,43 +21,49 @@ public class BallVelocity implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
-		float xVelocity = entity.getBody().getLinearVelocity().x;
-		float yVelocity = entity.getBody().getLinearVelocity().y;
+		if (GameInfo.isLevelReadyToStart() && BallStartLevel.start) {
 
-		if (Math.abs(xVelocity) > maxVelocity) {
-			if (xVelocity < 0) {
-				entity.getBody().setLinearVelocity(-maxVelocity, yVelocity);
+			float xVelocity = entity.getBody().getLinearVelocity().x;
+			float yVelocity = entity.getBody().getLinearVelocity().y;
+
+			if (Math.abs(xVelocity) > maxVelocity) {
+				if (xVelocity < 0) {
+					entity.getBody().setLinearVelocity(-maxVelocity, yVelocity);
+				}
+				else {
+					entity.getBody().setLinearVelocity(maxVelocity, yVelocity);
+				}
 			}
-			else {
-				entity.getBody().setLinearVelocity(maxVelocity, yVelocity);
+
+			if (Math.abs(yVelocity) > maxVelocity) {
+				if (yVelocity < 0) {
+					entity.getBody().setLinearVelocity(xVelocity, -maxVelocity);
+				}
+				else {
+					entity.getBody().setLinearVelocity(xVelocity, maxVelocity);
+				}
+			}
+
+			if (Math.abs(xVelocity) < minVelocity) {
+				if (xVelocity < 0) {
+					entity.getBody().setLinearVelocity(-minVelocity, yVelocity);
+				}
+				else if (xVelocity > 0) {
+					entity.getBody().setLinearVelocity(minVelocity, yVelocity);
+				}
+			}
+
+			if (Math.abs(yVelocity) < minVelocity) {
+				if (yVelocity < 0) {
+					entity.getBody().setLinearVelocity(xVelocity, -minVelocity);
+				}
+				else if (yVelocity > 0) {
+					entity.getBody().setLinearVelocity(xVelocity, minVelocity);
+				}
 			}
 		}
-
-		if (Math.abs(yVelocity) > maxVelocity) {
-			if (yVelocity < 0) {
-				entity.getBody().setLinearVelocity(xVelocity, -maxVelocity);
-			}
-			else {
-				entity.getBody().setLinearVelocity(xVelocity, maxVelocity);
-			}
-		}
-
-		if (Math.abs(xVelocity) < minVelocity) {
-			if (xVelocity < 0) {
-				entity.getBody().setLinearVelocity(-minVelocity, yVelocity);
-			}
-			else if (xVelocity > 0) {
-				entity.getBody().setLinearVelocity(minVelocity, yVelocity);
-			}
-		}
-
-		if (Math.abs(yVelocity) < minVelocity) {
-			if (yVelocity < 0) {
-				entity.getBody().setLinearVelocity(xVelocity, -minVelocity);
-			}
-			else if (yVelocity > 0) {
-				entity.getBody().setLinearVelocity(xVelocity, minVelocity);
-			}
+		else {
+			entity.getBody().setLinearVelocity(0, 0);
 		}
 	}
 }

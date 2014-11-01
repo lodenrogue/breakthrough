@@ -32,6 +32,7 @@ public class WorldManager {
 	public static void updateWorld() {
 		// To prevent stutters on mobile devices and on some desktop PCs
 		// don't use Gdx.graphics.getDeltaTime()
+
 		world.step(1 / 60f, 6, 3);
 		destroyBodiesInQueue();
 	}

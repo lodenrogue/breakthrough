@@ -1,9 +1,12 @@
 package com.littlebandit.breakthrough.states;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
@@ -28,6 +31,7 @@ public class PlayState extends State {
 	private EntityArrayList entities;
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
+	private Body bounds;
 	private boolean debug = false;
 
 	public PlayState(GameStateManager gsm) {
@@ -38,14 +42,14 @@ public class PlayState extends State {
 	public void create() {
 		font = new BitmapFont();
 		entities = new EntityArrayList();
-		GameManager.setEntityArrayList(entities);
-
 		b2dRenderer = new Box2DDebugRenderer();
 
-                // Make sure to reset all game info on creation
-                GameInfo.setScore(0);
-                GameInfo.setPlayerLives(3);
-                
+		GameManager.setEntityArrayList(entities);
+
+		// Make sure to reset all game info on creation
+		GameInfo.setScore(0);
+		GameInfo.setPlayerLives(3);
+
 		createCamera();
 		createEntities();
 	}
@@ -59,13 +63,17 @@ public class PlayState extends State {
 		if (debug) {
 			debugCamera.update();
 		}
-		
-                // If we have zero lives we go to game over!
-                if (GameInfo.getPlayerLives() == 0)
-                {
-                    // GAME OVER!
-                    gsm.popAndPush(new GameOverState(gsm));
-                }
+
+		// If we have zero lives we go to game over!
+		if (GameInfo.getPlayerLives() == 0) {
+			// GAME OVER!
+			gsm.popAndPush(new GameOverState(gsm));
+		}
+
+		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+			GameInfo.setIsLevelReadyToStart(false);
+			gsm.popAndPush(new PlayState(gsm));
+		}
 	}
 
 	@Override
@@ -76,26 +84,27 @@ public class PlayState extends State {
 		// Render all entities in our list
 		entities.renderAll(batch);
 
-                // Render the players score and lives
+		// Render the players score and lives
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
-		
+
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
 			b2dRenderer.render(WorldManager.getWorld(), debugCamera.combined);
 		}
 	}
-	
+
 	@Override
 	public void pause() {
 		gsm.pushNew(new PauseMenuState(gsm));
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		font.dispose();
 		entities.disposeAll();
+		WorldManager.getWorld().destroyBody(bounds);
 	}
 
 	/**
@@ -141,8 +150,7 @@ public class PlayState extends State {
 	}
 
 	private void createScreenBounds() {
-		EntityFactory.createScreenBounds();
+		bounds = EntityFactory.createScreenBounds();
 	}
 
-	
 }

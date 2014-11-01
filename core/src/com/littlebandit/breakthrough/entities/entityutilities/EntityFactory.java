@@ -80,7 +80,7 @@ public class EntityFactory {
 		return e;
 	}
 
-	public static void createScreenBounds() {
+	public static Body createScreenBounds() {
 		EdgeShape es = new EdgeShape();
 
 		float rightX = Breakthrough.VIRTUAL_WIDTH / ppm;
@@ -101,8 +101,11 @@ public class EntityFactory {
 		// ---Top Side--- //
 		es.set(leftX, topY, rightX, topY);
 		body.createFixture(es, 1.0f);
+		body.setUserData("bounds");
 
 		es.dispose();
+
+		return body;
 
 	}
 

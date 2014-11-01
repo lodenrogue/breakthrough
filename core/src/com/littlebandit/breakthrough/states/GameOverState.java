@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
-import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
+import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 
 /**
  * Game Over!
@@ -34,6 +34,7 @@ public class GameOverState extends State {
 		// Wait for the player to press any key to reset the game
 		if (Gdx.input.isKeyPressed(Keys.ANY_KEY) || Gdx.input.isTouched()) {
 			gsm.popAndPush(new PlayState(gsm));
+			GameInfo.setIsLevelReadyToStart(false);
 		}
 	}
 
