@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class TiledConverter {
-	private ArrayList<String> lines = new ArrayList<>();
+	private ArrayList<String> lines = new ArrayList<String>();
 	private String path;
 
 	public TiledConverter() {
@@ -58,7 +58,7 @@ public class TiledConverter {
 	}
 
 	private ArrayList<String> changeGlyphs(ArrayList<String> array) {
-		ArrayList<String> output = new ArrayList<>();
+		ArrayList<String> output = new ArrayList<String>();
 
 		for (String s : array) {
 			String tmp = s;
