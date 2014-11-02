@@ -18,7 +18,5 @@ public class BallStartLevel implements UpdateComponent {
 			ParticleManager.getParticleEffect("trail").start();
 			entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 		}
-
 	}
-
 }

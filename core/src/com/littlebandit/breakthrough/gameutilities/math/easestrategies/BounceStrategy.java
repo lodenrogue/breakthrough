@@ -1,6 +1,6 @@
 package com.littlebandit.breakthrough.gameutilities.math.easestrategies;
 
-public class BounceStrategy implements EaseStrategy {
+public class BounceStrategy extends SimpleEaseStrategy {
 
 	@Override
 	public float easeIn(float startTime, float beginValue, float endValue, float endTime) {
@@ -18,7 +18,7 @@ public class BounceStrategy implements EaseStrategy {
 		else if (startTime < (2 / 2.75f)) {
 			return change * (7.5625f * (startTime -= (1.5f / 2.75f)) * startTime + .75f) + beginValue;
 		}
-		else if (startTime < (2.5 / 2.75)) {
+		else if (startTime < (2.5 / 2.75f)) {
 			return change * (7.5625f * (startTime -= (2.25f / 2.75f)) * startTime + .9375f) + beginValue;
 		}
 		else {

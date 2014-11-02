@@ -1,6 +1,6 @@
 package com.littlebandit.breakthrough.gameutilities.math.easestrategies;
 
-public class ExpoStrategy implements EaseStrategy {
+public class ExpoStrategy extends SimpleEaseStrategy {
 
 	@Override
 	public float easeIn(float startTime, float beginValue, float endValue, float endTime) {

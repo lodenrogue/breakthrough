@@ -1,6 +1,6 @@
 package com.littlebandit.breakthrough.gameutilities.math.easestrategies;
 
-public class BackStrategy implements EaseStrategy {
+public class BackStrategy extends SimpleEaseStrategy {
 	float s = 1.70158f;
 
 	@Override

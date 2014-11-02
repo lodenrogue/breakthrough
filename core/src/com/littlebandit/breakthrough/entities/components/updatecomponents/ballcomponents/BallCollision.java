@@ -1,49 +1,21 @@
 package com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents;
 
-import com.badlogic.gdx.Gdx;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
-import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseStrategy;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.ScaleTween;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.Tween;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticStrategy;
 
 public class BallCollision implements UpdateComponent {
-	private boolean doCollisionAnimation = false;
-	private boolean doGetSmall = false;
-
-	private float scaleTime = 0f;
-	private float scaleBeginValue;
-	private float scaleEndValue;
-	private float scaleEndTime;
-
-	private EaseStrategy scaleStrategy = new ElasticStrategy();
+	private Tween scaleTween = new ScaleTween(0, 2.4f, 1, 1.5f, EaseDirection.EASE_OUT, new ElasticStrategy());
 
 	@Override
 	public void update(Entity entity) {
 		if (entity.isColliding()) {
-			doCollisionAnimation = true;
-			doGetSmall = true;
-			scaleTime = 0f;
-			entity.getSprite().setScale(2.4f);
+			scaleTween.start();
 			entity.setIsColliding(false);
 		}
-
-		if (doCollisionAnimation) {
-			if (doGetSmall) {
-				if (scaleTime == 0f) {
-					scaleEndTime = (float) (Math.random() * 1.0f) + 1.0f;
-					scaleBeginValue = entity.getSprite().getScaleX();
-					scaleEndValue = 1;
-				}
-				if (scaleTime < scaleEndTime) {
-					float scale = scaleStrategy.easeOut(scaleTime, scaleBeginValue, scaleEndValue, scaleEndTime);
-					entity.getSprite().setScale(scale);
-					scaleTime += Gdx.graphics.getDeltaTime();
-				}
-				if (scaleTime >= scaleEndTime) {
-					doGetSmall = false;
-					scaleTime = 0f;
-				}
-			}
-		}
+		scaleTween.update(entity);
 	}
 }

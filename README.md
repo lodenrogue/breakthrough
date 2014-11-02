@@ -37,7 +37,7 @@ How the Entity system works
 
 The Entity system has a few core packages. 
 
-1. entites - Where the Entity interface and all derived Entity implementations should go. There is a SimpleEntity implementation that should fit many uses of the interface. This class can be extended with a constructor that calls SimpleEntity as super(). Any entity classes that need additional functionality should enxtend the SimpleEntity class, in most cases, and add the necessary functionality.
+1. entites - Where the Entity interface and all derived Entity implementations should go. There is a SimpleEntity implementation that should fit many uses of the interface. This class can be extended with a constructor that calls SimpleEntity as super(). Any entity classes that need additional functionality should extend the SimpleEntity class, in most cases, and add the necessary functionality.
 
 2. components - This includes two packages.
     a. rendercomponents - Where any render functionalities should be written. There is an interface called RenderComponent. This interface should be implemented and it's render() method used for render code.
@@ -49,4 +49,4 @@ The Entity system has a few core packages.
     
     As an example, when you are going to create a new entity use an EntityArrayList and call the add() method. Inside of the add() method call the EntityFactory and create your desired entity.
 
-The Entity system contains one other class. The Postition class. This is a simple X and Y coordinate class. It's simple enough to use. Read through the code to understand it's simple getter and setter methods.
+The Entity system contains one other class. The Postition class. This is a simple X and Y coordinate class. Read through the code to understand it's getter and setter methods.
