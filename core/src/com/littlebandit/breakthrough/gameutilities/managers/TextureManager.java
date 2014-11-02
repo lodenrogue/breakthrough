@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class TextureManager {
-	private static Texture ball, paddle, block;
 	private static HashMap<String, Texture> textures;
 
 	private TextureManager() {
@@ -15,15 +14,9 @@ public class TextureManager {
 
 	public static void initialize() {
 		textures = new HashMap<String, Texture>();
-
-		ball = new Texture(Gdx.files.internal("ball.png"));
-		paddle = new Texture(Gdx.files.internal("paddle.png"));
-		block = new Texture(Gdx.files.internal("block.png"));
-
-		textures.put("ball", ball);
-		textures.put("paddle", paddle);
-		textures.put("block", block);
-
+		textures.put("ball", new Texture(Gdx.files.internal("ball.png")));
+		textures.put("paddle", new Texture(Gdx.files.internal("paddle.png")));
+		textures.put("block", new Texture(Gdx.files.internal("block.png")));
 	}
 
 	public static Texture getTexture(String key) {

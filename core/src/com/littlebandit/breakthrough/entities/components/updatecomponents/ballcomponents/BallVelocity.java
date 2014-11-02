@@ -16,8 +16,8 @@ import com.littlebandit.breakthrough.gameutilities.GameInfo;
  */
 
 public class BallVelocity implements UpdateComponent {
-	public static float maxVelocity = 20f;
-	public static float minVelocity = 10f;
+	public static float maxVelocity = 30f;
+	public static float minVelocity = 20f;
 
 	@Override
 	public void update(Entity entity) {

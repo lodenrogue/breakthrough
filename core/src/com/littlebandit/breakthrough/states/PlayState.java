@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
@@ -14,6 +13,7 @@ import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
+import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 import com.littlebandit.breakthrough.gameutilities.map.MapBuilder;
@@ -31,7 +31,6 @@ public class PlayState extends State {
 	private EntityArrayList entities;
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
-	private Body bounds;
 	private boolean debug = false;
 
 	public PlayState(GameStateManager gsm) {
@@ -87,6 +86,7 @@ public class PlayState extends State {
 		// Render the players score and lives
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
+		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 100, 100);
 
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
@@ -104,7 +104,8 @@ public class PlayState extends State {
 	public void dispose() {
 		font.dispose();
 		entities.disposeAll();
-		WorldManager.getWorld().destroyBody(bounds);
+		WorldManager.destroyAllBodies();
+		ParticleManager.reset();
 	}
 
 	/**
@@ -128,8 +129,8 @@ public class PlayState extends State {
 	private void createEntities() {
 		createScreenBounds();
 		createBlocks();
-		createPaddle();
 		createBall();
+		createPaddle();
 
 	}
 
@@ -150,7 +151,6 @@ public class PlayState extends State {
 	}
 
 	private void createScreenBounds() {
-		bounds = EntityFactory.createScreenBounds();
+		EntityFactory.createScreenBounds();
 	}
-
 }

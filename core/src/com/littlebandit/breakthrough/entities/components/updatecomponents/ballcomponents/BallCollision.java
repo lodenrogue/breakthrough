@@ -23,14 +23,14 @@ public class BallCollision implements UpdateComponent {
 			doCollisionAnimation = true;
 			doGetSmall = true;
 			scaleTime = 0f;
-			entity.getSprite().setScale(1.5f);
+			entity.getSprite().setScale(2.4f);
 			entity.setIsColliding(false);
 		}
 
 		if (doCollisionAnimation) {
 			if (doGetSmall) {
 				if (scaleTime == 0f) {
-					scaleEndTime = (float) (Math.random() * 0.5f) + 0.5f;
+					scaleEndTime = (float) (Math.random() * 1.0f) + 1.0f;
 					scaleBeginValue = entity.getSprite().getScaleX();
 					scaleEndValue = 1;
 				}

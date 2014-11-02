@@ -124,5 +124,4 @@ public abstract class SimpleEntity implements Entity {
 	}
 
 	public abstract void disposeAll();
-
 }

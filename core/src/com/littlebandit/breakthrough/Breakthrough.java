@@ -9,9 +9,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.littlebandit.breakthrough.gameutilities.GameContactListener;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
+import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
-import com.littlebandit.breakthrough.states.*;
+import com.littlebandit.breakthrough.states.MenuState;
 
 public class Breakthrough extends ApplicationAdapter {
 	public static final int VIRTUAL_WIDTH = 800;
@@ -37,6 +38,7 @@ public class Breakthrough extends ApplicationAdapter {
 		WorldManager.createWorld(new Vector2(0, 0), true);
 		WorldManager.getWorld().setContactListener(new GameContactListener());
 		TextureManager.initialize();
+		ParticleManager.initialize();
 
 		gsm = new GameStateManager();
 		gsm.popAndPush(new MenuState(gsm));
@@ -76,5 +78,6 @@ public class Breakthrough extends ApplicationAdapter {
 	public void dispose() {
 		gsm.dispose();
 		TextureManager.dispose();
+		ParticleManager.dispose();
 	}
 }

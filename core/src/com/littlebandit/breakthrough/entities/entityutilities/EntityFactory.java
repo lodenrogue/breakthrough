@@ -1,6 +1,8 @@
 package com.littlebandit.breakthrough.entities.entityutilities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -65,7 +67,11 @@ public class EntityFactory {
 	}
 
 	public static Entity createBlock(String id, Sprite sprite, float x, float y) {
-		Entity e = new Block(id, sprite, x, y);
+		Block e = new Block(id, sprite, x, y);
+
+		e.getSprite().setColor(Color.ORANGE);
+		getRandomColor(); // use this to get a random predetermined
+				  // color. See method bellow.
 
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
@@ -138,5 +144,36 @@ public class EntityFactory {
 		fixtureDef.restitution = restitution;
 
 		return fixtureDef;
+	}
+
+	private static Color getRandomColor() {
+		int random = MathUtils.random(5);
+		Color color;
+
+		switch (random) {
+		case 0:
+			color = Color.RED;
+			break;
+		case 1:
+			color = Color.GREEN;
+			break;
+		case 2:
+			color = Color.BLUE;
+			break;
+		case 3:
+			color = Color.YELLOW;
+			break;
+		case 4:
+			color = Color.PURPLE;
+			break;
+		case 5:
+			color = Color.ORANGE;
+			break;
+		default:
+			color = Color.WHITE;
+			break;
+		}
+
+		return color;
 	}
 }

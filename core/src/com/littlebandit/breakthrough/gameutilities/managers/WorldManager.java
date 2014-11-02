@@ -23,6 +23,21 @@ public class WorldManager {
 		return world;
 	}
 
+	/**
+	 * Destroys all bodies in the world.
+	 */
+	public static void destroyAllBodies() {
+		// First have to remove the bodies in the queue so we don't get
+		// a cross reference error.
+		destroyBodiesInQueue();
+
+		Array<Body> bodies = new Array<Body>();
+		world.getBodies(bodies);
+		for (Body b : bodies) {
+			world.destroyBody(b);
+		}
+	}
+
 	public static void addBodyToBeDestroyed(Body body) {
 		destroyBodyQueue.add(body);
 	}
