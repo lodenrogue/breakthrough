@@ -5,6 +5,12 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * Manager for texture resources.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class TextureManager {
 	private static HashMap<String, Texture> textures;
 
@@ -12,6 +18,9 @@ public class TextureManager {
 
 	}
 
+	/**
+	 * Initializes this manager. Adds the textures to the texture hash map.
+	 */
 	public static void initialize() {
 		textures = new HashMap<String, Texture>();
 		textures.put("ball", new Texture(Gdx.files.internal("ball.png")));
@@ -19,14 +28,22 @@ public class TextureManager {
 		textures.put("block", new Texture(Gdx.files.internal("block.png")));
 	}
 
+	/**
+	 * Returns a texture given a key.
+	 * 
+	 * @param key Key referencing a texture.
+	 * @return Returns a texture matching the given key.
+	 */
 	public static Texture getTexture(String key) {
 		return textures.get(key);
 	}
 
+	/**
+	 * Disposes all texture resources in the internal hash map.
+	 */
 	public static void dispose() {
 		for (String key : textures.keySet()) {
 			textures.get(key).dispose();
 		}
 	}
-
 }

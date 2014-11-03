@@ -7,6 +7,12 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 
+/**
+ * Update component implementation for ball entity special start level logic.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class BallStartLevel implements UpdateComponent {
 	public static boolean start = false;
 

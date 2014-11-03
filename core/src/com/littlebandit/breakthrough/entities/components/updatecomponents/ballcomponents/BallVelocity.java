@@ -22,7 +22,6 @@ public class BallVelocity implements UpdateComponent {
 	@Override
 	public void update(Entity entity) {
 		if (GameInfo.isLevelReadyToStart() && BallStartLevel.start) {
-
 			float xVelocity = entity.getBody().getLinearVelocity().x;
 			float yVelocity = entity.getBody().getLinearVelocity().y;
 

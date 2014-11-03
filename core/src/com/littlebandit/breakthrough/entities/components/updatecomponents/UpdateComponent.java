@@ -8,9 +8,7 @@ import com.littlebandit.breakthrough.entities.Entity;
  * @author Miguel Hernandez
  *
  */
-
 public interface UpdateComponent {
 
 	public void update(Entity entity);
-
 }

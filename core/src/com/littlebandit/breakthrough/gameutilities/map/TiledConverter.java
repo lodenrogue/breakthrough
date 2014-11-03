@@ -31,13 +31,20 @@ public class TiledConverter {
 		t.convert("tiledOutput.lua", "level1.map");
 	}
 
+	/**
+	 * Converts a given file into a map level.
+	 * 
+	 * @param fileName Input file containing data to be converted.
+	 * @param targetFileName Output file name where converted data is to be
+	 *                written.
+	 */
 	public void convert(String fileName, String targetFileName) {
 		lines = readFile(fileName);
 		lines = cleanSpaces(lines);
 		lines = changeGlyphs(lines);
 		export(targetFileName, lines);
 
-		System.out.println(path+ targetFileName + " written with the following data: ");
+		System.out.println(path + targetFileName + " written with the following data: ");
 		for (String s : lines) {
 			System.out.println(s);
 		}

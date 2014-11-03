@@ -7,7 +7,7 @@ import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirec
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
 /**
- * Performs Tween on entity body. DividingF by pixels per meter value is
+ * Performs Tween on entity body. Dividing by pixels per meter value is
  * recommended.
  * 
  * @author Miguel Hernandez

@@ -5,6 +5,13 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
+/**
+ * Tween class for implementing easing strategies given a direction and other
+ * parameters.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public abstract class Tween implements UpdateComponent {
 	protected boolean start = false;
 	protected boolean doTween = false;

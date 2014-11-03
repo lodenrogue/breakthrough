@@ -1,6 +1,5 @@
 package com.littlebandit.breakthrough;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -61,9 +60,6 @@ public class Breakthrough extends ApplicationAdapter {
 
 	@Override
 	public void pause() {
-		if (Gdx.app.getType().equals(ApplicationType.Android)) {
-			Gdx.app.exit();
-		}
 		appState = ApplicationState.Paused;
 		gsm.pause();
 	}

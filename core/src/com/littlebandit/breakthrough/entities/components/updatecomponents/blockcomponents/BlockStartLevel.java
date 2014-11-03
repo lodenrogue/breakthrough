@@ -13,21 +13,30 @@ import com.littlebandit.breakthrough.gameutilities.math.easestrategies.CircStrat
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticStrategy;
 
+/**
+ * Update component implementation for block entity special start level logic.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class BlockStartLevel implements UpdateComponent {
 	private float ppm = Breakthrough.PIXELS_PER_METER;
-	private boolean startTween = false;
 	private float time = 0;
-	private boolean readyToStart = false;
 	private float endValue = 1;
 	private float endTime = (float) (Math.random() * 1f) + 0.5f;
+
+	private boolean startTween = false;
+	private boolean readyToStart = false;
+
 	private Vector2 beginPosition;
 	private Vector2 endPosition;
 
-	private Tween scaleTween = new ScaleTween(time, 0, endValue, endTime, EaseDirection.EASE_IN, new CircStrategy());
 	private Tween positionTween;
+	private Tween scaleTween = new ScaleTween(time, 0, endValue, endTime, EaseDirection.EASE_IN, new CircStrategy());
 
 	@Override
 	public void update(Entity entity) {
+		// start the tweens
 		if (!startTween) {
 			startTween = true;
 
@@ -42,6 +51,12 @@ public class BlockStartLevel implements UpdateComponent {
 			positionTween.start();
 			scaleTween.start();
 		}
+
+		/*
+		 * if tweens have started update them and check if time has
+		 * reached it's target. If it has, inform the game that the
+		 * level is ready to start.
+		 */
 		if (startTween && !readyToStart) {
 			scaleTween.update(entity);
 			positionTween.update(entity);
@@ -50,11 +65,11 @@ public class BlockStartLevel implements UpdateComponent {
 
 			if (time >= 1.5f && !readyToStart) {
 				readyToStart = true;
+				GameInfo.setIsLevelReadyToStart(true);
+
 				entity.getSprite().setScale(endValue);
 				entity.getBody().setTransform(endPosition, entity.getBody().getAngle());
-				GameInfo.setIsLevelReadyToStart(true);
 			}
 		}
-
 	}
 }

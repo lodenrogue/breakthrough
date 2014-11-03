@@ -5,6 +5,12 @@ import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
+/**
+ * Scale tween algorithm. Tweens using a given ease strategy and direction.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class ScaleTween extends Tween {
 
 	public ScaleTween(float startTime, float beginValue, float endValue, float endTime, EaseDirection direction, SimpleEaseStrategy strategy) {

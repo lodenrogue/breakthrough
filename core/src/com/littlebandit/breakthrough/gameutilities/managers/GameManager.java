@@ -19,28 +19,54 @@ public class GameManager {
 
 	}
 
+	/**
+	 * Sets the EntityArrayList.
+	 * 
+	 * @param entities
+	 */
 	public static void setEntityArrayList(EntityArrayList entities) {
 		GameManager.entities = entities;
 	}
 
+	/**
+	 * 
+	 * @return Returns the EntityArrayList
+	 */
 	public static EntityArrayList getEntityArrayList() {
 		return entities;
 	}
 
+	/**
+	 * Sets the GameStateManager.
+	 * 
+	 * @param gsm GameStateManager.
+	 */
 	public static void setGameStateManager(GameStateManager gsm) {
 		GameManager.gsm = gsm;
 	}
 
+	/**
+	 * 
+	 * @return Returns the GameStateManager.
+	 */
 	public static GameStateManager getGameStateManager() {
 		return gsm;
 	}
 
+	/**
+	 * Sets the main game camera.
+	 * 
+	 * @param camera Main game camera.
+	 */
 	public static void setCamera(OrthographicCamera camera) {
 		GameManager.camera = camera;
 	}
 
+	/**
+	 * 
+	 * @return Returns the main game camera.
+	 */
 	public static OrthographicCamera getCamera() {
 		return camera;
 	}
-
 }

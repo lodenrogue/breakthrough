@@ -21,9 +21,9 @@ public class BallUpdateComponent implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
+		startLevel.update(entity);
 		position.update(entity);
 		movement.update(entity);
-		startLevel.update(entity);
 		collision.update(entity);
 		debug.update(entity);
 	}

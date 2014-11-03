@@ -3,6 +3,13 @@ package com.littlebandit.breakthrough.entities.components.updatecomponents.ballc
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 
+/**
+ * Update component implementation for ball entity movement. Houses movement
+ * logic.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class BallMovement implements UpdateComponent {
 	private UpdateComponent velocity = new BallVelocity();
 	private UpdateComponent bounds = new BallBounds();

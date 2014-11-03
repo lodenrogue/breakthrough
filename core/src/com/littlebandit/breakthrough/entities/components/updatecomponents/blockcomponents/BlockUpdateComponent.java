@@ -5,6 +5,12 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.DebugU
 import com.littlebandit.breakthrough.entities.components.updatecomponents.PositionUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 
+/**
+ * Update component implementation for block entity.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class BlockUpdateComponent implements UpdateComponent {
 	private UpdateComponent startLevel = new BlockStartLevel();
 	private UpdateComponent position = new PositionUpdateComponent();

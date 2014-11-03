@@ -6,6 +6,9 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.CircStrategy;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
 /**
  * Update component implementation. Handles paddle movement based on touch
@@ -19,7 +22,13 @@ public class PaddleTouchMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
 
+	private float cVelocity = 0;
+	private float currentTime = 0;
+	private float beginValue;
+	private float endTime = 0.5f;
 	private float ppm = Breakthrough.PIXELS_PER_METER;
+
+	private SimpleEaseStrategy moveEase = new CircStrategy();
 
 	@Override
 	public void update(Entity entity) {
@@ -59,14 +68,23 @@ public class PaddleTouchMovement implements UpdateComponent {
 
 		float cameraX = GameManager.getCamera().position.x;
 
-		if (touchPos.x > cameraX && canMoveRight) {
+		if (touchPos.x >= cameraX && canMoveRight && Gdx.input.isTouched()) {
 			entity.getBody().setLinearVelocity(PaddleMovement.velocity, 0);
+			currentTime = 0;
+			beginValue = PaddleMovement.velocity;
 		}
-		else if (touchPos.x < cameraX && canMoveLeft) {
+		else if (touchPos.x < cameraX && canMoveLeft && Gdx.input.isTouched()) {
 			entity.getBody().setLinearVelocity(-PaddleMovement.velocity, 0);
+			currentTime = 0;
+			beginValue = -PaddleMovement.velocity;
 		}
 		else {
-			entity.getBody().setLinearVelocity(0, 0);
+			// ease into zero velocity
+			if (currentTime < endTime) {
+				cVelocity = moveEase.ease(currentTime, beginValue, 0, endTime, EaseDirection.EASE_OUT);
+				currentTime += Gdx.graphics.getDeltaTime();
+			}
+			entity.getBody().setLinearVelocity(cVelocity, 0);
 		}
 	}
 }

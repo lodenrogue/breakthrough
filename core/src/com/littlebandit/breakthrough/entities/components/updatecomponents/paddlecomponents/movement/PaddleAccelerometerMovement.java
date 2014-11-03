@@ -6,6 +6,13 @@ import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
 
+/**
+ * Update component implementation for paddle entity mobile accelerometer
+ * movement.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class PaddleAccelerometerMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;

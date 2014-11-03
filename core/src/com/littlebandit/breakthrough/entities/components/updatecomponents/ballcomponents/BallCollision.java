@@ -7,11 +7,18 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticStrategy;
 
+/**
+ * Update component implementation for ball collision logic.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class BallCollision implements UpdateComponent {
 	private Tween scaleTween = new ScaleTween(0, 2.4f, 1, 1.5f, EaseDirection.EASE_OUT, new ElasticStrategy());
 
 	@Override
 	public void update(Entity entity) {
+		// handle scale tweening
 		if (entity.isColliding()) {
 			scaleTween.start();
 			entity.setIsColliding(false);

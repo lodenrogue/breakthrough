@@ -5,12 +5,29 @@ import com.badlogic.gdx.Input;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.CircStrategy;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
+import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
+/**
+ * Update component implementation for paddle entity's key movement. Checks and
+ * handles the paddle reaching the side edges of the screen. Handles actual
+ * movement based on key input.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class PaddleKeyMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
 
+	private float cVelocity = 0;
+	private float currentTime = 0;
+	private float beginValue;
+	private float endTime = 0.5f;
 	private float ppm = Breakthrough.PIXELS_PER_METER;
+
+	private SimpleEaseStrategy moveEase = new CircStrategy();
 
 	@Override
 	public void update(Entity entity) {
@@ -49,12 +66,21 @@ public class PaddleKeyMovement implements UpdateComponent {
 
 		if (moveRight && canMoveRight) {
 			entity.getBody().setLinearVelocity(PaddleMovement.velocity, 0);
+			currentTime = 0;
+			beginValue = PaddleMovement.velocity;
 		}
 		else if (moveLeft && canMoveLeft) {
 			entity.getBody().setLinearVelocity(-PaddleMovement.velocity, 0);
+			currentTime = 0;
+			beginValue = -PaddleMovement.velocity;
 		}
 		else {
-			entity.getBody().setLinearVelocity(0, 0);
+			// ease into zero velocity
+			if (currentTime < endTime) {
+				cVelocity = moveEase.ease(currentTime, beginValue, 0, endTime, EaseDirection.EASE_OUT);
+				currentTime += Gdx.graphics.getDeltaTime();
+			}
+			entity.getBody().setLinearVelocity(cVelocity, 0);
 		}
 	}
 }
