@@ -86,7 +86,7 @@ public class PlayState extends State {
 		// Render the players score and lives
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
-		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 100, 100);
+		font.drawMultiLine(batch, "Debug Mode:\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nKeys: Space to start. \nR to reset level.", 10, 200);
 
 		if (debug) {
 			batch.setProjectionMatrix(debugCamera.combined);
