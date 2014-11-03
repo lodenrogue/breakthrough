@@ -15,7 +15,7 @@ import com.littlebandit.breakthrough.gameutilities.GameInfo;
  */
 
 public class PaddleMovement implements UpdateComponent {
-	public static float velocity = BallVelocity.maxVelocity * 1.1f;
+	public static float velocity = BallVelocity.maxVelocity * 1.25f;
 	private UpdateComponent movement;
 	private UpdateComponent touchMovement = new PaddleTouchMovement();
 	private UpdateComponent keyMovement = new PaddleKeyMovement();
