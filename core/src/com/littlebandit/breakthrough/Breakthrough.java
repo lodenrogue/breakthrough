@@ -13,6 +13,7 @@ import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 import com.littlebandit.breakthrough.states.MenuState;
+import com.littlebandit.breakthrough.states.SplashScreenState;
 
 public class Breakthrough extends ApplicationAdapter {
 	public static final int VIRTUAL_WIDTH = 800;
@@ -35,7 +36,7 @@ public class Breakthrough extends ApplicationAdapter {
 	public void create() {
 
         //load game music
-        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("gamemusic.mp3"));
+        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("01 A Night Of Dizzy Spells.mp3"));
         gameMusic.setLooping(true);
         gameMusic.setVolume(0.1f); //adjusted volume coz default was making my ear bleed...
         gameMusic.play();
@@ -49,7 +50,7 @@ public class Breakthrough extends ApplicationAdapter {
 		ParticleManager.initialize();
 
 		gsm = new GameStateManager();
-		gsm.popAndPush(new MenuState(gsm));
+		gsm.popAndPush(new SplashScreenState(gsm));
 	}
 
 	@Override
