@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
+import com.littlebandit.breakthrough.entities.playstate.Camera;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
@@ -112,12 +113,12 @@ public class PlayState extends State {
 	private void createCamera() {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
+
 		Breakthrough.viewport.setCamera(camera);
 		GameManager.setCamera(camera);
 
 		debugCamera = new OrthographicCamera();
 		debugCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH / Breakthrough.PIXELS_PER_METER, Breakthrough.VIRTUAL_HEIGHT / Breakthrough.PIXELS_PER_METER);
-
 	}
 
 	/**
@@ -127,6 +128,7 @@ public class PlayState extends State {
 		entities = new EntityArrayList();
 		GameManager.setEntityArrayList(entities);
 
+		createCameraEntity();
 		createScreenBounds();
 		createBlocks();
 		createBall();
@@ -151,6 +153,10 @@ public class PlayState extends State {
 	}
 
 	private void createScreenBounds() {
-		EntityFactory.createScreenBounds();
+		entities.add(EntityFactory.createScreenBounds("bounds", null, 0, 0));
+	}
+
+	private void createCameraEntity() {
+		entities.add(new Camera("camera", null, 0, 0));
 	}
 }

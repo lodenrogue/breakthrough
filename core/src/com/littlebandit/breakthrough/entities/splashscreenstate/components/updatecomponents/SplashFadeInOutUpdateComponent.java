@@ -33,7 +33,7 @@ public class SplashFadeInOutUpdateComponent implements UpdateComponent {
 				startFadeOutTween = true;
 				alphaFadeTween = new AlphaTween(0, 1, 0, fadeTime, EaseDirection.EASE_IN, new QuadStrategy());
 				alphaFadeTween.start();
-				currentTime = 0;
+				currentTime = 0f;
 			}
 
 			if (startFadeInTween || startFadeOutTween) {

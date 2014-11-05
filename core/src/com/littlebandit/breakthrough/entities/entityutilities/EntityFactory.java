@@ -15,6 +15,7 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.playstate.Ball;
 import com.littlebandit.breakthrough.entities.playstate.Block;
+import com.littlebandit.breakthrough.entities.playstate.ScreenBounds;
 import com.littlebandit.breakthrough.entities.playstate.Paddle;
 import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.entities.splashscreenstate.LittleBanditSplash;
@@ -90,7 +91,8 @@ public class EntityFactory {
 		return e;
 	}
 
-	public static Body createScreenBounds() {
+	public static Entity createScreenBounds(String id, Sprite sprite, float x, float y) {
+		Entity e = new ScreenBounds(id, sprite, x, y);
 		EdgeShape es = new EdgeShape();
 
 		float rightX = Breakthrough.VIRTUAL_WIDTH / ppm;
@@ -111,11 +113,14 @@ public class EntityFactory {
 		// ---Top Side--- //
 		es.set(leftX, topY, rightX, topY);
 		body.createFixture(es, 1.0f);
-		body.setUserData("bounds");
+
+		body.setUserData(id);
+		body.setTransform(x / ppm, y / ppm, 0);
+		e.setBody(body);
 
 		es.dispose();
 
-		return body;
+		return e;
 
 	}
 
