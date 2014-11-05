@@ -22,6 +22,7 @@ public class GameContactListener implements ContactListener {
 		handleBallCollision(idA, idB, contact, true);
 		handleBlockCollision(idA, idB, contact, true);
 		handlePaddleCollision(idA, idB, contact, true);
+		handleBoundsCollision(idA, idB, contact, true);
 
 	}
 
@@ -36,6 +37,28 @@ public class GameContactListener implements ContactListener {
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
+
+	}
+
+	private void handleBoundsCollision(String idA, String idB, Contact contact, boolean isColliding) {
+		if (idA != null && idB != null) {
+			boolean ballBounds = idA.contains("ball") && idB.contains("bounds");
+			boolean boundsBall = idA.contains("bounds") && idB.contains("ball");
+
+			if (ballBounds) {
+				Entity entityB = GameManager.getEntityArrayList().getEntityById(idB);
+				if (entityB != null) {
+					entityB.setIsColliding(isColliding);
+				}
+
+			}
+			else if (boundsBall) {
+				Entity entityA = GameManager.getEntityArrayList().getEntityById(idA);
+				if (entityA != null) {
+					entityA.setIsColliding(isColliding);
+				}
+			}
+		}
 
 	}
 
