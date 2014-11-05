@@ -8,13 +8,11 @@ package com.littlebandit.breakthrough.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.littlebandit.breakthrough.Breakthrough;
-import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
+import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 
 /**
  *

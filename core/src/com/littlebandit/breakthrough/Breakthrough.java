@@ -12,7 +12,6 @@ import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
-import com.littlebandit.breakthrough.states.MenuState;
 import com.littlebandit.breakthrough.states.SplashScreenState;
 
 public class Breakthrough extends ApplicationAdapter {
