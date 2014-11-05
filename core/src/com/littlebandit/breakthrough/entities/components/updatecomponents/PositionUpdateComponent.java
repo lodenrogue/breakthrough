@@ -23,15 +23,21 @@ public class PositionUpdateComponent implements UpdateComponent {
 		Sprite sprite = entity.getSprite();
 		body = entity.getBody();
 
-		float bodyX = body.getPosition().x * ppm;
-		float bodyY = body.getPosition().y * ppm;
-		float x = bodyX - sprite.getWidth() / 2;
-		float y = bodyY - sprite.getHeight() / 2;
+		if (body != null) {
 
-		entity.getPosition().setX(x);
-		entity.getPosition().setY(y);
-		sprite.setRotation(MathUtils.radiansToDegrees * body.getAngle());
-		sprite.setPosition(x, y);
+			float bodyX = body.getPosition().x * ppm;
+			float bodyY = body.getPosition().y * ppm;
+			float x = bodyX - sprite.getWidth() / 2;
+			float y = bodyY - sprite.getHeight() / 2;
+
+			entity.getPosition().setX(x);
+			entity.getPosition().setY(y);
+			sprite.setRotation(MathUtils.radiansToDegrees * body.getAngle());
+			sprite.setPosition(x, y);
+		}
+		else {
+			sprite.setPosition(entity.getPosition().getY(), entity.getPosition().getY());
+		}
 
 	}
 

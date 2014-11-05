@@ -1,10 +1,10 @@
-package com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents.movement;
+package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.paddlecomponents.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallVelocity;
 
 /**
  * Update component implementation for paddle entity mobile accelerometer

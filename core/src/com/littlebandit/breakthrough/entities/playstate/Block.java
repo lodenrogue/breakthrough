@@ -1,7 +1,8 @@
-package com.littlebandit.breakthrough.entities;
+package com.littlebandit.breakthrough.entities.playstate;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.blockcomponents.BlockUpdateComponent;
+import com.littlebandit.breakthrough.entities.SimpleEntity;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.blockcomponents.BlockUpdateComponent;
 
 /**
  * Block entity.

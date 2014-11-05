@@ -118,8 +118,10 @@ public abstract class SimpleEntity implements Entity {
 
 	@Override
 	public final void dispose() {
+		if (body != null) {
+			WorldManager.addBodyToBeDestroyed(body);
+		}
 		GameManager.getEntityArrayList().removeEntity(this);
-		WorldManager.addBodyToBeDestroyed(body);
 		disposeAll();
 	}
 

@@ -23,6 +23,10 @@ public class TextureManager {
 	 */
 	public static void initialize() {
 		textures = new HashMap<String, Texture>();
+
+		textures.put("title", new Texture(Gdx.files.internal("title.png")));
+		textures.put("littlebanditlogo", new Texture(Gdx.files.internal("LittleBanditLogo.png")));
+
 		textures.put("ball", new Texture(Gdx.files.internal("ball.png")));
 		textures.put("paddle", new Texture(Gdx.files.internal("paddle.png")));
 		textures.put("block", new Texture(Gdx.files.internal("block.png")));

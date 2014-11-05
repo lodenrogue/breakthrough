@@ -1,29 +1,28 @@
-package com.littlebandit.breakthrough.entities.components.updatecomponents.blockcomponents;
+package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.paddlecomponents;
 
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.DebugUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.PositionUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.paddlecomponents.movement.PaddleMovement;
 
 /**
- * Update component implementation for block entity.
+ * Update component implementation for the Paddle Entity.
  * 
  * @author Miguel Hernandez
  *
  */
-public class BlockUpdateComponent implements UpdateComponent {
-	private UpdateComponent startLevel = new BlockStartLevel();
-	private UpdateComponent position = new PositionUpdateComponent();
-	private UpdateComponent debug = new DebugUpdateComponent();
-	// private UpdateComponent ease = new BlockEase();
 
-	private UpdateComponent collision = new BlockCollision();
+public class PaddleUpdateComponent implements UpdateComponent {
+	private UpdateComponent position = new PositionUpdateComponent();
+	private UpdateComponent movement = new PaddleMovement();
+	private UpdateComponent collision = new PaddleCollision();
+	private UpdateComponent debug = new DebugUpdateComponent();
 
 	@Override
 	public void update(Entity entity) {
-		startLevel.update(entity);
 		position.update(entity);
-		// ease.update(entity);
+		movement.update(entity);
 		collision.update(entity);
 		debug.update(entity);
 

@@ -21,6 +21,7 @@ import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 public class MenuState extends State {
 	private BitmapFont font;
 	private OrthographicCamera camera;
+	private boolean readyToTouch = false;
 
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
@@ -29,17 +30,19 @@ public class MenuState extends State {
 	@Override
 	public void create() {
 		createCamera();
+		createFont();
 
-        font = new BitmapFont(Gdx.files.internal("pix.fnt")); //custom font
-        font.setColor(1,1,1,1); //white color for font
-    }
+	}
 
 	@Override
 	public void update() {
 		camera.update();
 
+		if (!Gdx.input.isTouched()) {
+			readyToTouch = true;
+		}
 		// Wait for the player to press any key to start the game
-		if (Gdx.input.isKeyPressed(Keys.ANY_KEY) || Gdx.input.isTouched()) {
+		if (Gdx.input.isKeyJustPressed(Keys.ANY_KEY) || (Gdx.input.isTouched() && readyToTouch)) {
 			gsm.popAndPush(new PlayState(gsm));
 		}
 	}
@@ -48,8 +51,11 @@ public class MenuState extends State {
 	public void render(SpriteBatch batch) {
 		batch.setProjectionMatrix(camera.combined);
 
-		// Render the players score
-		font.drawWrapped(batch, "Press any key or touch to start ", 0 , Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+		float xOffset = 60;
+		float yOffset = 50;
+		// Render start message
+		font.draw(batch, "Press any key ", 160 + xOffset, Breakthrough.VIRTUAL_HEIGHT - 200f);
+		font.draw(batch, "or touch to start", 160, Breakthrough.VIRTUAL_HEIGHT - (200 + yOffset));
 
 	}
 
@@ -58,11 +64,16 @@ public class MenuState extends State {
 		font.dispose();
 	}
 
+	private void createFont() {
+		// custom font set to white
+		font = new BitmapFont(Gdx.files.internal("pix.fnt"));
+		font.setColor(1, 1, 1, 1);
+	}
+
 	private void createCamera() {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
 		Breakthrough.viewport.setCamera(camera);
 		GameManager.setCamera(camera);
 	}
-
 }

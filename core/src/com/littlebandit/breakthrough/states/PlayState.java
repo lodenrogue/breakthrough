@@ -40,10 +40,7 @@ public class PlayState extends State {
 	@Override
 	public void create() {
 		font = new BitmapFont();
-		entities = new EntityArrayList();
 		b2dRenderer = new Box2DDebugRenderer();
-
-		GameManager.setEntityArrayList(entities);
 
 		// Make sure to reset all game info on creation
 		GameInfo.setScore(0);
@@ -127,6 +124,9 @@ public class PlayState extends State {
 	 * Creates the game game entities.
 	 */
 	private void createEntities() {
+		entities = new EntityArrayList();
+		GameManager.setEntityArrayList(entities);
+
 		createScreenBounds();
 		createBlocks();
 		createBall();

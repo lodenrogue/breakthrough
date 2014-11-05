@@ -1,8 +1,9 @@
-package com.littlebandit.breakthrough.entities;
+package com.littlebandit.breakthrough.entities.playstate;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.littlebandit.breakthrough.entities.components.rendercomponents.BallRenderComponent;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallUpdateComponent;
+import com.littlebandit.breakthrough.entities.SimpleEntity;
+import com.littlebandit.breakthrough.entities.playstate.components.rendercomponents.BallRenderComponent;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallUpdateComponent;
 
 /**
  * Ball Entity.

@@ -1,23 +1,24 @@
-package com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents.movement;
+package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.paddlecomponents.movement;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector3;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.CircStrategy;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
 /**
- * Update component implementation for paddle entity's key movement. Checks and
- * handles the paddle reaching the side edges of the screen. Handles actual
- * movement based on key input.
+ * Update component implementation. Handles paddle movement based on touch
+ * input.
  * 
  * @author Miguel Hernandez
  *
  */
-public class PaddleKeyMovement implements UpdateComponent {
+
+public class PaddleTouchMovement implements UpdateComponent {
 	private boolean canMoveRight = true;
 	private boolean canMoveLeft = true;
 
@@ -57,19 +58,22 @@ public class PaddleKeyMovement implements UpdateComponent {
 			canMoveRight = true;
 		}
 
-		// Get input keys and handle movement based on the keys pressed.
+		/*
+		 * Get touch position and handle movement based on the x
+		 * position of the input.
+		 */
 
-		boolean keyRight = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
-		boolean keyLeft = Gdx.input.isKeyPressed(Input.Keys.LEFT);
-		boolean moveRight = keyRight && !keyLeft;
-		boolean moveLeft = keyLeft && !keyRight;
+		Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+		GameManager.getCamera().unproject(touchPos);
 
-		if (moveRight && canMoveRight) {
+		float cameraX = GameManager.getCamera().position.x;
+
+		if (touchPos.x >= cameraX && canMoveRight && Gdx.input.isTouched()) {
 			entity.getBody().setLinearVelocity(PaddleMovement.velocity, 0);
 			currentTime = 0;
 			beginValue = PaddleMovement.velocity;
 		}
-		else if (moveLeft && canMoveLeft) {
+		else if (touchPos.x < cameraX && canMoveLeft && Gdx.input.isTouched()) {
 			entity.getBody().setLinearVelocity(-PaddleMovement.velocity, 0);
 			currentTime = 0;
 			beginValue = -PaddleMovement.velocity;

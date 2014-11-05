@@ -1,4 +1,4 @@
-package com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents;
+package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents;
 
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;

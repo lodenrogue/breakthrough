@@ -1,7 +1,8 @@
-package com.littlebandit.breakthrough.entities;
+package com.littlebandit.breakthrough.entities.playstate;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents.PaddleUpdateComponent;
+import com.littlebandit.breakthrough.entities.SimpleEntity;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.paddlecomponents.PaddleUpdateComponent;
 
 /**
  * Paddle entity.

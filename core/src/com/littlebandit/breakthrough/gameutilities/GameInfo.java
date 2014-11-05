@@ -1,6 +1,6 @@
 package com.littlebandit.breakthrough.gameutilities;
 
-import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallStartLevel;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallStartLevel;
 
 /**
  * Game information utility class. Holds game variables that are commonly used

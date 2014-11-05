@@ -1,7 +1,9 @@
 package com.littlebandit.breakthrough.gameutilities.managers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
+import com.littlebandit.breakthrough.gameutilities.Link;
 
 /**
  * Game manager utility class. Holds game objects.
@@ -14,9 +16,43 @@ public class GameManager {
 	private static GameStateManager gsm;
 	private static OrthographicCamera camera;
 	private static EntityArrayList entities;
+	private static Array<Link> links;
+	private static int currentLink = 0;
 
 	private GameManager() {
 
+	}
+
+	public static void setLinksArray(Array<Link> links) {
+		GameManager.links = links;
+	}
+
+	public static void addLink(Link link) {
+		links.add(link);
+	}
+
+	public static Link getLink() {
+		return links.get(currentLink);
+	}
+
+	public static Link getNextLink() {
+		currentLink++;
+		if (currentLink < links.size) {
+			return links.get(currentLink);
+		}
+		return null;
+	}
+
+	public static Link getPreviousLink() {
+		currentLink--;
+		if (currentLink >= 0) {
+			return links.get(currentLink);
+		}
+		return null;
+	}
+
+	public static Array<Link> getLinks() {
+		return links;
 	}
 
 	/**

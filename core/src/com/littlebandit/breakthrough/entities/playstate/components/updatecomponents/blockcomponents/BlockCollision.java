@@ -1,4 +1,4 @@
-package com.littlebandit.breakthrough.entities.components.updatecomponents.blockcomponents;
+package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.blockcomponents;
 
 import com.badlogic.gdx.Gdx;
 import com.littlebandit.breakthrough.entities.Entity;

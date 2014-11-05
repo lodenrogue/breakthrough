@@ -12,11 +12,15 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.littlebandit.breakthrough.Breakthrough;
-import com.littlebandit.breakthrough.entities.Ball;
-import com.littlebandit.breakthrough.entities.Block;
 import com.littlebandit.breakthrough.entities.Entity;
-import com.littlebandit.breakthrough.entities.Paddle;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
+import com.littlebandit.breakthrough.entities.playstate.Ball;
+import com.littlebandit.breakthrough.entities.playstate.Block;
+import com.littlebandit.breakthrough.entities.playstate.Paddle;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallVelocity;
+import com.littlebandit.breakthrough.entities.splashscreenstate.LittleBanditSplash;
+import com.littlebandit.breakthrough.entities.splashscreenstate.Title;
+import com.littlebandit.breakthrough.gameutilities.Link;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 
 /**
@@ -173,7 +177,18 @@ public class EntityFactory {
 			color = Color.WHITE;
 			break;
 		}
-
 		return color;
+	}
+
+	public static Entity createTitle(String id, Sprite sprite, float x, float y) {
+		Entity e = new Title(id, sprite, x, y);
+		GameManager.addLink((Link) e);
+		return e;
+	}
+
+	public static Entity createLittleBanditSplash(String id, Sprite sprite, float x, float y) {
+		Entity e = new LittleBanditSplash(id, sprite, x, y);
+		GameManager.addLink((Link) e);
+		return e;
 	}
 }

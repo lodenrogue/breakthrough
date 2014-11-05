@@ -2,12 +2,12 @@ package com.littlebandit.breakthrough;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.littlebandit.breakthrough.gameutilities.GameContactListener;
+import com.littlebandit.breakthrough.gameutilities.managers.AudioManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;
@@ -20,7 +20,6 @@ public class Breakthrough extends ApplicationAdapter {
 	public static final float PIXELS_PER_METER = 15f;
 	public static final String TITLE = "Breakthrough";
 	public static FitViewport viewport;
-    private Music gameMusic;
 
 	public enum ApplicationState {
 		Running, Paused, Resumed
@@ -34,18 +33,13 @@ public class Breakthrough extends ApplicationAdapter {
 	@Override
 	public void create() {
 
-        //load game music
-        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("01 A Night Of Dizzy Spells.mp3"));
-        gameMusic.setLooping(true);
-        gameMusic.setVolume(0.1f); //adjusted volume coz default was making my ear bleed...
-        gameMusic.play();
-
 		batch = new SpriteBatch();
 		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 
 		WorldManager.createWorld(new Vector2(0, 0), true);
 		WorldManager.getWorld().setContactListener(new GameContactListener());
 		TextureManager.initialize();
+		AudioManager.initialize();
 		ParticleManager.initialize();
 
 		gsm = new GameStateManager();
@@ -71,20 +65,19 @@ public class Breakthrough extends ApplicationAdapter {
 	public void pause() {
 		appState = ApplicationState.Paused;
 		gsm.pause();
-        gameMusic.pause();
 	}
 
 	@Override
 	public void resume() {
 		appState = ApplicationState.Resumed;
 		gsm.resume();
-        gameMusic.play();
 	}
 
 	@Override
 	public void dispose() {
 		gsm.dispose();
 		TextureManager.dispose();
+		AudioManager.dispose();
 		ParticleManager.dispose();
 	}
 }
