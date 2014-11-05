@@ -8,8 +8,10 @@ package com.littlebandit.breakthrough.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
@@ -29,8 +31,10 @@ public class MenuState extends State {
 	@Override
 	public void create() {
 		createCamera();
-		font = new BitmapFont();
-	}
+
+        font = new BitmapFont(Gdx.files.internal("pix.fnt")); //custom font
+        font.setColor(1,1,1,1); //white color for font
+    }
 
 	@Override
 	public void update() {
@@ -47,7 +51,7 @@ public class MenuState extends State {
 		batch.setProjectionMatrix(camera.combined);
 
 		// Render the players score
-		font.draw(batch, "Main Menu, Press Any Key or Touch to Start ", Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
+		font.drawWrapped(batch, "Press any key or touch to start ", 0 , Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
 
 	}
 
