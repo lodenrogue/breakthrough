@@ -7,8 +7,8 @@ import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.entities.Entity;
 
 /**
- * Array extension. Contains capabilities to call entity render and update methods and
- * search/return entities by id.
+ * Array extension. Contains capabilities to call entity render and update
+ * methods and search/return entities by id.
  * 
  * @author Miguel Hernandez
  *
@@ -84,5 +84,22 @@ public class EntityArrayList extends Array<Entity> {
 	 */
 	public Entity getEntityById(String id) {
 		return entityHashMap.get(id);
+	}
+
+	/**
+	 * Returns the first instance of an entity containing an id that matched
+	 * the partialID. Returns null if none is found.
+	 * 
+	 * @param partialID Partial string id to match with entity.
+	 * @return Return entity or null if none found.
+	 */
+	public Entity findFirstInstanceOf(String partialID) {
+		for (Entity e : this) {
+			if (e.getId().contains(partialID)) {
+				return e;
+			}
+		}
+
+		return null;
 	}
 }

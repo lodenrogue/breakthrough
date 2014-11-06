@@ -33,9 +33,11 @@ public class PlayState extends State {
 	private Box2DDebugRenderer b2dRenderer;
 	private OrthographicCamera debugCamera;
 	private boolean debug = false;
+	private int level;
 
-	public PlayState(GameStateManager gsm) {
+	public PlayState(GameStateManager gsm, int level) {
 		super(gsm);
+		this.level = level;
 	}
 
 	@Override
@@ -46,6 +48,7 @@ public class PlayState extends State {
 		// Make sure to reset all game info on creation
 		GameInfo.setScore(0);
 		GameInfo.setPlayerLives(3);
+		GameInfo.setLevel(level);
 
 		createCamera();
 		createEntities();
@@ -61,6 +64,8 @@ public class PlayState extends State {
 			debugCamera.update();
 		}
 
+		handleEndOfLevel();
+
 		// If we have zero lives we go to game over!
 		if (GameInfo.getPlayerLives() == 0) {
 			// GAME OVER!
@@ -69,7 +74,7 @@ public class PlayState extends State {
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			GameInfo.setIsLevelReadyToStart(false);
-			gsm.popAndPush(new PlayState(gsm));
+			gsm.popAndPush(new PlayState(gsm, level));
 		}
 	}
 
@@ -82,6 +87,7 @@ public class PlayState extends State {
 		entities.renderAll(batch);
 
 		// Render the players score and lives
+		font.draw(batch, "Level: " + level, Breakthrough.VIRTUAL_WIDTH / 2 - 100, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.drawMultiLine(batch, "Debug Mode:\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nKeys: Space to start. \nR to reset level.", 10, 200);
@@ -149,7 +155,7 @@ public class PlayState extends State {
 	private void createBlocks() {
 		float width = TextureManager.getTexture("block").getWidth();
 		float height = TextureManager.getTexture("block").getHeight();
-		MapBuilder.buildLevelMap("level1.map", entities, (0 + width / 2) + width / 2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
+		MapBuilder.buildLevelMap("level" + level + ".map", entities, (0 + width / 2) + width / 2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
 	}
 
 	private void createScreenBounds() {
@@ -158,5 +164,26 @@ public class PlayState extends State {
 
 	private void createCameraEntity() {
 		entities.add(new Camera("camera", null, 0, 0));
+	}
+
+	private void handleEndOfLevel() {
+		// if all blocks have been destroyed
+		if (entities.findFirstInstanceOf("block") == null) {
+			// Do level finish stuff
+			int nextLevel = GameInfo.getLevel() + 1;
+
+			// if there is a next level file then move on to the
+			// next level or else go back to the main menu.
+
+			if (Gdx.files.internal("level" + nextLevel + ".map").exists()) {
+				GameInfo.setLevel(nextLevel);
+				GameInfo.setIsLevelReadyToStart(false);
+				gsm.popAndPush(new PlayState(gsm, nextLevel));
+			}
+			else {
+				gsm.popAndPush(new MenuState(gsm));
+			}
+
+		}
 	}
 }

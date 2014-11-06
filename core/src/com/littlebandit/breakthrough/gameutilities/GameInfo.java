@@ -11,15 +11,8 @@ import com.littlebandit.breakthrough.entities.playstate.components.updatecompone
  */
 public class GameInfo {
 	private static boolean isLevelReadyToStart = false;
-
-	/**
-	 * The game score
-	 */
+	private static int level = 1;
 	private static int score = 0;
-
-	/**
-	 * The number of lives the player has
-	 */
 	private static int playerLives = 3;
 
 	/**
@@ -27,6 +20,14 @@ public class GameInfo {
 	 */
 	private GameInfo() {
 
+	}
+
+	public static void setLevel(int level) {
+		GameInfo.level = level;
+	}
+
+	public static int getLevel() {
+		return level;
 	}
 
 	public static void setIsLevelReadyToStart(boolean start) {

@@ -28,7 +28,7 @@ public class TiledConverter {
 
 		TiledConverter t = new TiledConverter();
 		System.out.println();
-		t.convert("tiledOutput.lua", "level1.map");
+		t.convert("tiledOutput.lua", "level4.map");
 	}
 
 	/**

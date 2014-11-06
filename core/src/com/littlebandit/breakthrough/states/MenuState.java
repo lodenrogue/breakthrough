@@ -41,9 +41,9 @@ public class MenuState extends State {
 		if (!Gdx.input.isTouched()) {
 			readyToTouch = true;
 		}
-		// Wait for the player to press any key to start the game
-		if (Gdx.input.isKeyJustPressed(Keys.ANY_KEY) || (Gdx.input.isTouched() && readyToTouch)) {
-			gsm.popAndPush(new PlayState(gsm));
+		// Wait for the player to press space or touch to start the game
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE) || (Gdx.input.isTouched() && readyToTouch)) {
+			gsm.popAndPush(new PlayState(gsm, 1));
 		}
 	}
 
@@ -51,10 +51,11 @@ public class MenuState extends State {
 	public void render(SpriteBatch batch) {
 		batch.setProjectionMatrix(camera.combined);
 
-		float xOffset = 60;
+		float xOffset = 80;
 		float yOffset = 50;
-		// Render start message
-		font.draw(batch, "Press any key ", 160 + xOffset, Breakthrough.VIRTUAL_HEIGHT - 200f);
+
+		font.draw(batch, "Main Menu", 160 + xOffset * 1.5f, Breakthrough.VIRTUAL_HEIGHT - 100f);
+		font.draw(batch, "Press space ", 160 + xOffset, Breakthrough.VIRTUAL_HEIGHT - 200f);
 		font.draw(batch, "or touch to start", 160, Breakthrough.VIRTUAL_HEIGHT - (200 + yOffset));
 
 	}
