@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
  */
 public class ParticleManager {
 	private static HashMap<String, ParticleEffect> particleEffects;
+	private static boolean renderTrail = false;
 
 	private ParticleManager() {
 
@@ -40,6 +41,8 @@ public class ParticleManager {
 			particleEffects.get(key).reset();
 
 		}
+
+		renderTrail = false;
 	}
 
 	/**
@@ -63,6 +66,13 @@ public class ParticleManager {
 		return particleEffects.get(key);
 	}
 
+	public static void startParticleEffect(String key) {
+		particleEffects.get(key).start();
+		if(key.equals("trail")){
+			renderTrail = true;
+		}
+	}
+
 	/**
 	 * Disposes a particle effect matching a given key.
 	 * 
@@ -83,5 +93,9 @@ public class ParticleManager {
 			particleEffects.get(key).dispose();
 			particleEffects.remove(key);
 		}
+	}
+
+	public static boolean doRenderTrail() {
+		return renderTrail;
 	}
 }

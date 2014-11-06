@@ -29,7 +29,8 @@ public class BallOutOfBounds implements UpdateComponent {
 	public void update(Entity entity) {
 
 		/**
-		 * Check to see if we are out of bounds!
+		 * Check to see if we are out of bounds then reset the ball
+		 * position and velocity
 		 */
 		if (entity.getPosition().getY() < -20) {
 			GameInfo.subtractPlayerLives(1);
@@ -38,14 +39,18 @@ public class BallOutOfBounds implements UpdateComponent {
 			entity.getBody().setTransform(ball.getStartX() / ppm, ball.getStartY() / ppm, entity.getBody().getAngle());
 			entity.getBody().setLinearVelocity(0, 0);
 
+			ParticleManager.reset();
 			reset = true;
 		}
 
+		/**
+		 * If space is pressed or touched then restart the emiters and
+		 */
 		if (reset) {
-			ParticleManager.reset();
+
 			if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isTouched()) {
 				ParticleManager.getParticleEffect("trail").getEmitters().get(0).setContinuous(true);
-				ParticleManager.getParticleEffect("trail").start();
+				ParticleManager.startParticleEffect("trail");
 
 				entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 				reset = false;

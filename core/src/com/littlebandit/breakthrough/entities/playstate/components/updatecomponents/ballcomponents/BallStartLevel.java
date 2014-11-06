@@ -21,7 +21,8 @@ public class BallStartLevel implements UpdateComponent {
 		if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isTouched()) && !start && GameInfo.isLevelReadyToStart()) {
 			start = true;
 			ParticleManager.getParticleEffect("trail").getEmitters().get(0).setContinuous(true);
-			ParticleManager.getParticleEffect("trail").start();
+			ParticleManager.startParticleEffect("trail");
+			
 			entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
 		}
 		
