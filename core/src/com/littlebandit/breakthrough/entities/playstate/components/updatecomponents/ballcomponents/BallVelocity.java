@@ -3,6 +3,7 @@ package com.littlebandit.breakthrough.entities.playstate.components.updatecompon
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
+import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 
 /**
  * Update component implementation. Holds the values for maximum and minimum
@@ -18,19 +19,38 @@ import com.littlebandit.breakthrough.gameutilities.GameInfo;
 public class BallVelocity implements UpdateComponent {
 	public static float maxVelocity = 20f;
 	public static float minVelocity = 10f;
+	private boolean ballAndPaddleCollided = false;
 
 	@Override
 	public void update(Entity entity) {
 		if (GameInfo.isLevelReadyToStart() && BallStartLevel.start) {
+			Entity paddle = GameManager.getEntityArrayList().getEntityById("paddle");
+
+			/*
+			 * Check to see if the ball and paddle have collided. We
+			 * need to know this in order to handle the x velocity.
+			 */
+			if (entity.isColliding() && paddle.isColliding()) {
+				ballAndPaddleCollided = true;
+			}
+
+			if (ballAndPaddleCollided && entity.isColliding() && !paddle.isColliding()) {
+				ballAndPaddleCollided = false;
+			}
+
 			float xVelocity = entity.getBody().getLinearVelocity().x;
 			float yVelocity = entity.getBody().getLinearVelocity().y;
 
 			if (Math.abs(xVelocity) > maxVelocity) {
 				if (xVelocity < 0) {
-					entity.getBody().setLinearVelocity(-maxVelocity, yVelocity);
+					if (!ballAndPaddleCollided) {
+						entity.getBody().setLinearVelocity(-maxVelocity, yVelocity);
+					}
 				}
 				else {
-					entity.getBody().setLinearVelocity(maxVelocity, yVelocity);
+					if (!ballAndPaddleCollided) {
+						entity.getBody().setLinearVelocity(maxVelocity, yVelocity);
+					}
 				}
 			}
 
@@ -60,6 +80,7 @@ public class BallVelocity implements UpdateComponent {
 					entity.getBody().setLinearVelocity(xVelocity, minVelocity);
 				}
 			}
+
 		}
 		else {
 			entity.getBody().setLinearVelocity(0, 0);

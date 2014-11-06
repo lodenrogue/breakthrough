@@ -11,12 +11,14 @@ import com.littlebandit.breakthrough.entities.components.updatecomponents.Update
  *
  */
 public class BallMovement implements UpdateComponent {
+	private UpdateComponent slicing = new BallSlicing();
 	private UpdateComponent velocity = new BallVelocity();
-	private UpdateComponent bounds = new BallBounds();
+	private UpdateComponent bounds = new BallOutOfBounds();
 	private UpdateComponent trail = new BallTrail();
 
 	@Override
 	public void update(Entity entity) {
+		slicing.update(entity);
 		velocity.update(entity);
 		bounds.update(entity);
 		trail.update(entity);

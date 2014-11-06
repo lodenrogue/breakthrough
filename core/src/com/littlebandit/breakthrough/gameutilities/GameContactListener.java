@@ -19,10 +19,10 @@ public class GameContactListener implements ContactListener {
 		String idA = (String) contact.getFixtureA().getBody().getUserData();
 		String idB = (String) contact.getFixtureB().getBody().getUserData();
 
-		handleBallCollision(idA, idB, contact, true);
+		handleCollision("ball", idA, idB, contact, true);
+		handleCollision("paddle", idA, idB, contact, true);
+		handleCollision("bounds", idA, idB, contact, true);
 		handleBlockCollision(idA, idB, contact, true);
-		handlePaddleCollision(idA, idB, contact, true);
-		handleBoundsCollision(idA, idB, contact, true);
 
 	}
 
@@ -40,66 +40,20 @@ public class GameContactListener implements ContactListener {
 
 	}
 
-	private void handleBoundsCollision(String idA, String idB, Contact contact, boolean isColliding) {
-		if (idA != null && idB != null) {
-			boolean ballBounds = idA.contains("ball") && idB.contains("bounds");
-			boolean boundsBall = idA.contains("bounds") && idB.contains("ball");
+	private void handleCollision(String id, String idA, String idB, Contact contact, boolean isColliding) {
+		boolean collidingA = idA.contains(id);
+		boolean collidingB = idB.contains(id);
 
-			if (ballBounds) {
-				Entity entityB = GameManager.getEntityArrayList().getEntityById(idB);
-				if (entityB != null) {
-					entityB.setIsColliding(isColliding);
-				}
-
-			}
-			else if (boundsBall) {
-				Entity entityA = GameManager.getEntityArrayList().getEntityById(idA);
-				if (entityA != null) {
-					entityA.setIsColliding(isColliding);
-				}
+		if (collidingA) {
+			Entity entityA = GameManager.getEntityArrayList().getEntityById(idA);
+			if (entityA != null) {
+				entityA.setIsColliding(true);
 			}
 		}
-
-	}
-
-	private void handleBallCollision(String idA, String idB, Contact contact, boolean isColliding) {
-		if (idA != null && idB != null) {
-			boolean ballCollidingA = idA.contains("ball");
-			boolean ballCollidingB = idB.contains("ball");
-
-			if (ballCollidingA) {
-				Entity entityA = GameManager.getEntityArrayList().getEntityById(idA);
-				if (entityA != null) {
-					entityA.setIsColliding(isColliding);
-				}
-
-			}
-			else if (ballCollidingB) {
-				Entity entityB = GameManager.getEntityArrayList().getEntityById(idB);
-				if (entityB != null) {
-					entityB.setIsColliding(isColliding);
-				}
-			}
-		}
-	}
-
-	private void handlePaddleCollision(String idA, String idB, Contact contact, boolean isColliding) {
-		if (idA != null && idB != null) {
-			boolean ballPaddle = idA.contains("ball") && idB.contains("paddle");
-			boolean paddleBall = idA.contains("paddle") && idB.contains("ball");
-
-			if (ballPaddle) {
-				Entity entityB = GameManager.getEntityArrayList().getEntityById(idB);
-				if (entityB != null) {
-					entityB.setIsColliding(isColliding);
-				}
-
-			}
-			else if (paddleBall) {
-				Entity entityA = GameManager.getEntityArrayList().getEntityById(idA);
-				if (entityA != null) {
-					entityA.setIsColliding(isColliding);
-				}
+		else if (collidingB) {
+			Entity entityB = GameManager.getEntityArrayList().getEntityById(idB);
+			if (entityB != null) {
+				entityB.setIsColliding(true);
 			}
 		}
 	}

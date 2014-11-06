@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 
 public class Shake implements UpdateComponent {
@@ -20,8 +21,10 @@ public class Shake implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
-		Entity bounds = GameManager.getEntityArrayList().getEntityById("bounds");
-		if (bounds.isColliding()) {
+		Entity ball = GameManager.getEntityArrayList().getEntityById("ball");
+		float ballXVelocity = ball.getBody().getLinearVelocity().x;
+
+		if (ball.isColliding() && Math.abs(ballXVelocity) > BallVelocity.maxVelocity) {
 			interval = 0.05f;
 			currentTime = interval;
 			shakePoints = generatePoints(5);
