@@ -12,7 +12,7 @@ import com.littlebandit.breakthrough.entities.playstate.components.updatecompone
 public class GameInfo {
 	private static boolean isLevelReadyToStart = false;
 	private static int level = 1;
-	private static int score = 0;
+	private static long score = 0;
 	private static int playerLives = 3;
 
 	/**
@@ -41,15 +41,15 @@ public class GameInfo {
 		return isLevelReadyToStart;
 	}
 
-	public static int getScore() {
+	public static long getScore() {
 		return score;
 	}
 
-	public static void setScore(int score) {
+	public static void setScore(long score) {
 		GameInfo.score = score;
 	}
 
-	public static void addScore(int number) {
+	public static void addScore(long number) {
 		score += number;
 	}
 

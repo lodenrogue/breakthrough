@@ -1,9 +1,13 @@
 package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
+import com.littlebandit.breakthrough.entities.playstate.Ball;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
+import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 
 /**
  * Update component implementation. Checks to see if the ball is out of bounds
@@ -14,7 +18,7 @@ import com.littlebandit.breakthrough.gameutilities.GameInfo;
  */
 
 public class BallOutOfBounds implements UpdateComponent {
-	public static boolean reset = false;
+	private static boolean reset = false;
 
 	/**
 	 * Pixels per meter
@@ -23,20 +27,37 @@ public class BallOutOfBounds implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
-		reset = false;
 
 		/**
 		 * Check to see if we are out of bounds!
 		 */
 		if (entity.getPosition().getY() < -20) {
-			reset = true;
 			GameInfo.subtractPlayerLives(1);
 
-			float x = Breakthrough.VIRTUAL_WIDTH / 2 / ppm;
-			float y = 200 / ppm;
+			Ball ball = (Ball) entity;
+			entity.getBody().setTransform(ball.getStartX() / ppm, ball.getStartY() / ppm, entity.getBody().getAngle());
+			entity.getBody().setLinearVelocity(0, 0);
 
-			entity.getBody().setTransform(x, y, entity.getBody().getAngle());
-			entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
+			reset = true;
 		}
+
+		if (reset) {
+			ParticleManager.reset();
+			if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isTouched()) {
+				ParticleManager.getParticleEffect("trail").getEmitters().get(0).setContinuous(true);
+				ParticleManager.getParticleEffect("trail").start();
+
+				entity.getBody().setLinearVelocity(BallVelocity.minVelocity, BallVelocity.maxVelocity);
+				reset = false;
+			}
+		}
+	}
+
+	public static boolean isReset() {
+		return reset;
+	}
+
+	public static void setReset(boolean reset) {
+		BallOutOfBounds.reset = reset;
 	}
 }

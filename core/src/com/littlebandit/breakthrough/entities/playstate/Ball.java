@@ -13,9 +13,12 @@ import com.littlebandit.breakthrough.entities.playstate.components.updatecompone
  */
 
 public class Ball extends SimpleEntity {
+	private float startX, startY;
 
 	public Ball(String id, Sprite sprite, float x, float y) {
 		super(id, sprite, x, y);
+		startX = x;
+		startY = y;
 		setUpdateComponent(new BallUpdateComponent());
 		setRenderComponent(new BallRenderComponent());
 	}
@@ -25,5 +28,14 @@ public class Ball extends SimpleEntity {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public float getStartX(){
+		return startX;
+	}
+	
+	public float getStartY(){
+		return startY;
+	}
+	
 
 }

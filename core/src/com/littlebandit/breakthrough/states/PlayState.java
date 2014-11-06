@@ -31,7 +31,7 @@ public class PlayState extends State {
 	private OrthographicCamera camera;
 	private EntityArrayList entities;
 	private Box2DDebugRenderer b2dRenderer;
-	private OrthographicCamera debugCamera;
+	private OrthographicCamera box2dCamera;
 	private boolean debug = false;
 	private int level;
 
@@ -46,7 +46,7 @@ public class PlayState extends State {
 		b2dRenderer = new Box2DDebugRenderer();
 
 		// Make sure to reset all game info on creation
-		GameInfo.setScore(0);
+		// GameInfo.setScore(0);
 		GameInfo.setPlayerLives(3);
 		GameInfo.setLevel(level);
 
@@ -61,7 +61,7 @@ public class PlayState extends State {
 		camera.update();
 
 		if (debug) {
-			debugCamera.update();
+			box2dCamera.update();
 		}
 
 		handleEndOfLevel();
@@ -93,8 +93,8 @@ public class PlayState extends State {
 		font.drawMultiLine(batch, "Debug Mode:\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nKeys: Space to start. \nR to reset level.", 10, 200);
 
 		if (debug) {
-			batch.setProjectionMatrix(debugCamera.combined);
-			b2dRenderer.render(WorldManager.getWorld(), debugCamera.combined);
+			batch.setProjectionMatrix(box2dCamera.combined);
+			b2dRenderer.render(WorldManager.getWorld(), box2dCamera.combined);
 		}
 	}
 
@@ -123,8 +123,8 @@ public class PlayState extends State {
 		Breakthrough.viewport.setCamera(camera);
 		GameManager.setCamera(camera);
 
-		debugCamera = new OrthographicCamera();
-		debugCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH / Breakthrough.PIXELS_PER_METER, Breakthrough.VIRTUAL_HEIGHT / Breakthrough.PIXELS_PER_METER);
+		box2dCamera = new OrthographicCamera();
+		box2dCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH / Breakthrough.PIXELS_PER_METER, Breakthrough.VIRTUAL_HEIGHT / Breakthrough.PIXELS_PER_METER);
 	}
 
 	/**

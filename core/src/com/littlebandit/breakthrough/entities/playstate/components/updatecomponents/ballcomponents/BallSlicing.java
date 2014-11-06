@@ -35,7 +35,7 @@ public class BallSlicing implements UpdateComponent {
 		float paddleRightX = paddle.getBody().getPosition().x + paddleWidth / 2;
 
 		// If the ball has not been reset handle slice effect
-		if (!BallOutOfBounds.reset) {
+		if (!BallOutOfBounds.isReset()) {
 
 			// if the paddle and ball are colliding and the paddle
 			// is going at full speed.
