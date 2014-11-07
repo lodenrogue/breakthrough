@@ -13,7 +13,6 @@ import com.littlebandit.breakthrough.states.State;
  *
  */
 public class GameStateManager {
-
 	private Stack<State> states;
 
 	public GameStateManager() {

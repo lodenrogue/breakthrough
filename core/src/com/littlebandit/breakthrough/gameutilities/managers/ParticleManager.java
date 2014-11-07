@@ -66,9 +66,15 @@ public class ParticleManager {
 		return particleEffects.get(key);
 	}
 
+	/**
+	 * Starts a particle effect matching the provided key.
+	 * 
+	 * @param key String key associated with the particle effect that should
+	 *                start.
+	 */
 	public static void startParticleEffect(String key) {
 		particleEffects.get(key).start();
-		if(key.equals("trail")){
+		if (key.equals("trail")) {
 			renderTrail = true;
 		}
 	}
@@ -95,6 +101,11 @@ public class ParticleManager {
 		}
 	}
 
+	/**
+	 * Returns true if rendering of the tail should be done.
+	 * 
+	 * @return
+	 */
 	public static boolean doRenderTrail() {
 		return renderTrail;
 	}

@@ -5,6 +5,12 @@ import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
+/**
+ * Performs tween on entity sprite alpha value.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class AlphaTween extends Tween {
 
 	public AlphaTween(float startTime, float beginValue, float endValue, float endTime, EaseDirection direction, SimpleEaseStrategy strategy) {

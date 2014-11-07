@@ -23,34 +23,64 @@ public class GameManager {
 
 	}
 
+	/**
+	 * Sets the Link objects array.
+	 * 
+	 * @param links
+	 */
 	public static void setLinksArray(Array<Link> links) {
 		GameManager.links = links;
 	}
 
+	/**
+	 * Adds a link to the array.
+	 * 
+	 * @param link
+	 */
 	public static void addLink(Link link) {
 		links.add(link);
 	}
 
+	/**
+	 * Returns the current link.
+	 * 
+	 * @return
+	 */
 	public static Link getLink() {
 		return links.get(currentLink);
 	}
 
+	/**
+	 * Returns the next link or null if there is none.
+	 * 
+	 * @return
+	 */
 	public static Link getNextLink() {
-		currentLink++;
-		if (currentLink < links.size) {
+		if (currentLink + 1 < links.size) {
+			currentLink++;
 			return links.get(currentLink);
 		}
 		return null;
 	}
 
+	/**
+	 * Returns the previous link or null if there is none.
+	 * 
+	 * @return
+	 */
 	public static Link getPreviousLink() {
-		currentLink--;
-		if (currentLink >= 0) {
+		if (currentLink - 1 >= 0) {
+			currentLink--;
 			return links.get(currentLink);
 		}
 		return null;
 	}
 
+	/**
+	 * Returns the links array.
+	 * 
+	 * @return
+	 */
 	public static Array<Link> getLinks() {
 		return links;
 	}

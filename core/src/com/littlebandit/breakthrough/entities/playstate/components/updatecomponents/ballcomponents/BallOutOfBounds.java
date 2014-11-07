@@ -45,6 +45,7 @@ public class BallOutOfBounds implements UpdateComponent {
 
 		/**
 		 * If space is pressed or touched then restart the emiters and
+		 * start moving the ball
 		 */
 		if (reset) {
 

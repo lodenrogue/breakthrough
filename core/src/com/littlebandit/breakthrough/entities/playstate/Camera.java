@@ -5,6 +5,12 @@ import com.littlebandit.breakthrough.entities.SimpleEntity;
 import com.littlebandit.breakthrough.entities.components.rendercomponents.EmptyRenderComponent;
 import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.cameracomponents.CameraUpdateComponent;
 
+/**
+ * Camera entity.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class Camera extends SimpleEntity {
 
 	public Camera(String id, Sprite sprite, float x, float y) {

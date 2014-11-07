@@ -10,6 +10,12 @@ import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.QuadStrategy;
 
+/**
+ * Update component implementation for a fade in effect.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class SplashFadeInUpdateComponent implements UpdateComponent {
 	private boolean startFadeInTween = false;
 
@@ -19,19 +25,27 @@ public class SplashFadeInUpdateComponent implements UpdateComponent {
 
 	@Override
 	public void update(Entity entity) {
+
+		// if this link is ready to start
 		Link link = (Link) entity;
 		if (link.isReadyToStart()) {
+
+			// start the fade in tween
 			if (!startFadeInTween) {
 				startFadeInTween = true;
 				alphaFadeTween.start();
 			}
 
+			// update the tween
 			if (startFadeInTween) {
 				alphaFadeTween.update(entity);
 			}
 
+			// increment the time
 			currentTime += Gdx.graphics.getDeltaTime();
 
+			// if we've reached our target time then start the next
+			// link
 			if (currentTime >= fadeTime + 2.0f) {
 				link.startNext(GameManager.getNextLink());
 			}

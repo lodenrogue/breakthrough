@@ -5,6 +5,12 @@ import com.littlebandit.breakthrough.entities.SimpleEntity;
 import com.littlebandit.breakthrough.entities.components.rendercomponents.EmptyRenderComponent;
 import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.boundscomponent.BoundsUpdateComponent;
 
+/**
+ * Screen bounds entity.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class ScreenBounds extends SimpleEntity {
 
 	public ScreenBounds(String id, Sprite sprite, float x, float y) {

@@ -6,7 +6,8 @@ import com.littlebandit.breakthrough.entities.components.rendercomponents.Render
 import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 
 /**
- * Render component implementation for ball entity.
+ * Render component implementation for ball entity. Handles particle effect
+ * rendering as well.
  * 
  * @author Miguel Hernandez
  *

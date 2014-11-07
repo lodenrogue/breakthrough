@@ -32,7 +32,6 @@ public class Breakthrough extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-
 		batch = new SpriteBatch();
 		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 

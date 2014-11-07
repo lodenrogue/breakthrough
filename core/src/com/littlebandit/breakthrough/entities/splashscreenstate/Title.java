@@ -5,6 +5,12 @@ import com.littlebandit.breakthrough.entities.SimpleEntity;
 import com.littlebandit.breakthrough.entities.splashscreenstate.components.updatecomponents.SplashFadeInUpdateComponent;
 import com.littlebandit.breakthrough.gameutilities.Link;
 
+/**
+ * Title entity. Implements the link interface.
+ * 
+ * @author Miguel Hernandez
+ *
+ */
 public class Title extends SimpleEntity implements Link {
 	private boolean start = false;
 
