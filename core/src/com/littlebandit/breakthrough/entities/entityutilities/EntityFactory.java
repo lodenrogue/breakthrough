@@ -40,6 +40,7 @@ public class EntityFactory {
 
 	public static Entity createBall(String id, Sprite sprite, float x, float y) {
 		Entity e = new Ball(id, sprite, x, y);
+		sprite.setColor(1f, 0.5f, 0.466667f, 1f);
 
 		CircleShape shape = new CircleShape();
 		shape.setRadius(sprite.getWidth() / 2 / ppm);

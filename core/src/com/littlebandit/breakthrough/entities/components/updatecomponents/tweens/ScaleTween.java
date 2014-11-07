@@ -6,7 +6,8 @@ import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirec
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.SimpleEaseStrategy;
 
 /**
- * Scale tween algorithm. Tweens using a given ease strategy and direction.
+ * Scale tween algorithm. Tweens the entity sprite using a given ease strategy
+ * and direction.
  * 
  * @author Miguel Hernandez
  *

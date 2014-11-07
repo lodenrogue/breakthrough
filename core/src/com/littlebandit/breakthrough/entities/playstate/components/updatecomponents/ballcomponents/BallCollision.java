@@ -1,9 +1,11 @@
 package com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents;
 
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.ScaleTween;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.Tween;
+import com.littlebandit.breakthrough.gameutilities.managers.ParticleManager;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticStrategy;
 
@@ -21,6 +23,8 @@ public class BallCollision implements UpdateComponent {
 		// handle scale tweening
 		if (entity.isColliding()) {
 			scaleTween.start();
+			ParticleEffect p = ParticleManager.getParticleEffect("trail");
+			p.scaleEffect(1);
 			entity.setIsColliding(false);
 		}
 		scaleTween.update(entity);

@@ -3,9 +3,11 @@ package com.littlebandit.breakthrough.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
@@ -29,11 +31,14 @@ import com.littlebandit.breakthrough.gameutilities.map.MapBuilder;
 public class PlayState extends State {
 	private BitmapFont font;
 	private OrthographicCamera camera;
+	private OrthographicCamera backgroundCamera;
+	private OrthographicCamera box2dCamera;
+
 	private EntityArrayList entities;
 	private Box2DDebugRenderer b2dRenderer;
-	private OrthographicCamera box2dCamera;
 	private boolean debug = false;
 	private int level;
+	private Texture background;
 
 	public PlayState(GameStateManager gsm, int level) {
 		super(gsm);
@@ -50,7 +55,8 @@ public class PlayState extends State {
 		GameInfo.setPlayerLives(3);
 		GameInfo.setLevel(level);
 
-		createCamera();
+		createCameras();
+		createBackground();
 		createEntities();
 	}
 
@@ -80,17 +86,18 @@ public class PlayState extends State {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		// Set our camera
-		batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(backgroundCamera.combined);
+		batch.draw(background, 0, 0);
 
-		// Render all entities in our list
+		batch.setProjectionMatrix(camera.combined);
 		entities.renderAll(batch);
 
-		// Render the players score and lives
 		font.draw(batch, "Level: " + level, Breakthrough.VIRTUAL_WIDTH / 2 - 100, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
-		font.drawMultiLine(batch, "Debug Mode:\nFPS: " + Gdx.graphics.getFramesPerSecond() + "\nKeys: Space to start. \nR to reset level.", 10, 200);
+		// font.drawMultiLine(batch, "Debug Mode:\nFPS: " +
+		// Gdx.graphics.getFramesPerSecond() +
+		// "\nKeys: Space to start. \nR to reset level.", 10, 200);
 
 		if (debug) {
 			batch.setProjectionMatrix(box2dCamera.combined);
@@ -116,15 +123,17 @@ public class PlayState extends State {
 	 * Creates the main state camera and any other debug or auxiliary
 	 * cameras.
 	 */
-	private void createCamera() {
+	private void createCameras() {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
-
 		Breakthrough.viewport.setCamera(camera);
 		GameManager.setCamera(camera);
 
 		box2dCamera = new OrthographicCamera();
 		box2dCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH / Breakthrough.PIXELS_PER_METER, Breakthrough.VIRTUAL_HEIGHT / Breakthrough.PIXELS_PER_METER);
+
+		backgroundCamera = new OrthographicCamera();
+		backgroundCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
 	}
 
 	/**
@@ -140,6 +149,23 @@ public class PlayState extends State {
 		createBall();
 		createPaddle();
 
+	}
+
+	private void createBackground() {
+		int random = MathUtils.random(3) + 1;
+
+		if (random == 1) {
+			background = TextureManager.getTexture("background1");
+		}
+		if (random == 2) {
+			background = TextureManager.getTexture("background2");
+		}
+		if (random == 3) {
+			background = TextureManager.getTexture("background3");
+		}
+		if (random == 4) {
+			background = TextureManager.getTexture("background4");
+		}
 	}
 
 	private void createPaddle() {
