@@ -36,7 +36,7 @@ public class PositionUpdateComponent implements UpdateComponent {
 			sprite.setPosition(x, y);
 		}
 		else {
-			sprite.setPosition(entity.getPosition().getY(), entity.getPosition().getY());
+			sprite.setPosition(entity.getPosition().getX(), entity.getPosition().getY());
 		}
 
 	}

@@ -75,6 +75,7 @@ public class Breakthrough extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 		gsm.dispose();
+		batch.dispose();
 		TextureManager.dispose();
 		AudioManager.dispose();
 		ParticleManager.dispose();
