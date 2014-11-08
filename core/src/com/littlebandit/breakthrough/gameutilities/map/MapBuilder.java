@@ -59,7 +59,7 @@ public class MapBuilder {
 
 			for (int i = 0; i < chars.length; i++) {
 				if (chars[i] == 'B') {
-					Sprite sprite = new Sprite(TextureManager.getTexture("block"));
+					Sprite sprite = new Sprite(TextureManager.getTexture("block00"));
 					entities.add(EntityFactory.createBlock("block" + idNumber, sprite, x, y));
 					idNumber++;
 				}

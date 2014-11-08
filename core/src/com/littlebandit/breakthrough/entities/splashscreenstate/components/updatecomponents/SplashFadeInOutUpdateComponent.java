@@ -5,7 +5,7 @@ import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.AlphaTween;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.Tween;
-import com.littlebandit.breakthrough.gameutilities.Link;
+import com.littlebandit.breakthrough.entities.entityutilities.Link;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.QuadStrategy;

@@ -11,7 +11,7 @@ import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
-import com.littlebandit.breakthrough.gameutilities.Link;
+import com.littlebandit.breakthrough.entities.entityutilities.Link;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
 import com.littlebandit.breakthrough.gameutilities.managers.TextureManager;

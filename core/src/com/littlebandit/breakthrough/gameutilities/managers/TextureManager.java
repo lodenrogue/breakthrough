@@ -32,9 +32,14 @@ public class TextureManager {
 		textures.put("title", new Texture(Gdx.files.internal("title.png")));
 		textures.put("littlebanditlogo", new Texture(Gdx.files.internal("LittleBanditLogo.png")));
 
-		textures.put("ball", new Texture(Gdx.files.internal("newBall.png")));
-		textures.put("paddle", new Texture(Gdx.files.internal("newPaddle.png")));
-		textures.put("block", new Texture(Gdx.files.internal("block.png")));
+		textures.put("ball", new Texture(Gdx.files.internal("Ball00.png")));
+
+		textures.put("paddle00", new Texture(Gdx.files.internal("Paddle00.png")));
+		textures.put("paddle01", new Texture(Gdx.files.internal("Paddle01.png")));
+
+		textures.put("block00", new Texture(Gdx.files.internal("Block00.png")));
+		textures.put("block01", new Texture(Gdx.files.internal("Block01.png")));
+		textures.put("block02", new Texture(Gdx.files.internal("Block02.png")));
 	}
 
 	/**

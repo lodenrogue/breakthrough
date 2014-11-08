@@ -1,8 +1,6 @@
 package com.littlebandit.breakthrough.entities.entityutilities;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -11,16 +9,16 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.playstate.Ball;
 import com.littlebandit.breakthrough.entities.playstate.Block;
-import com.littlebandit.breakthrough.entities.playstate.ScreenBounds;
 import com.littlebandit.breakthrough.entities.playstate.Paddle;
+import com.littlebandit.breakthrough.entities.playstate.ScreenBounds;
 import com.littlebandit.breakthrough.entities.playstate.components.updatecomponents.ballcomponents.BallVelocity;
 import com.littlebandit.breakthrough.entities.splashscreenstate.LittleBanditSplash;
 import com.littlebandit.breakthrough.entities.splashscreenstate.Title;
-import com.littlebandit.breakthrough.gameutilities.Link;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 
@@ -40,7 +38,6 @@ public class EntityFactory {
 
 	public static Entity createBall(String id, Sprite sprite, float x, float y) {
 		Entity e = new Ball(id, sprite, x, y);
-		sprite.setColor(1f, 0.5f, 0.466667f, 1f);
 
 		CircleShape shape = new CircleShape();
 		shape.setRadius(sprite.getWidth() / 2 / ppm);
@@ -56,8 +53,8 @@ public class EntityFactory {
 		return e;
 	}
 
-	public static Entity createPaddle(String id, Sprite sprite, float x, float y) {
-		Entity e = new Paddle(id, sprite, x, y);
+	public static Entity createPaddle(String id, Sprite sprite, Array<Sprite> animation, float frameDuration, float x, float y) {
+		Entity e = new Paddle(id, sprite, animation, frameDuration, x, y);
 
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
@@ -74,10 +71,6 @@ public class EntityFactory {
 
 	public static Entity createBlock(String id, Sprite sprite, float x, float y) {
 		Block e = new Block(id, sprite, x, y);
-
-		e.getSprite().setColor(Color.ORANGE);
-		getRandomColor(); // use this to get a random predetermined
-				  // color. See method bellow.
 
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
@@ -154,36 +147,6 @@ public class EntityFactory {
 		fixtureDef.restitution = restitution;
 
 		return fixtureDef;
-	}
-
-	private static Color getRandomColor() {
-		int random = MathUtils.random(5);
-		Color color;
-
-		switch (random) {
-		case 0:
-			color = Color.RED;
-			break;
-		case 1:
-			color = Color.GREEN;
-			break;
-		case 2:
-			color = Color.BLUE;
-			break;
-		case 3:
-			color = Color.YELLOW;
-			break;
-		case 4:
-			color = Color.PURPLE;
-			break;
-		case 5:
-			color = Color.ORANGE;
-			break;
-		default:
-			color = Color.WHITE;
-			break;
-		}
-		return color;
 	}
 
 	public static Entity createTitle(String id, Sprite sprite, float x, float y) {

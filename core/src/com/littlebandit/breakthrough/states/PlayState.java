@@ -3,12 +3,11 @@ package com.littlebandit.breakthrough.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
@@ -31,14 +30,12 @@ import com.littlebandit.breakthrough.gameutilities.map.MapBuilder;
 public class PlayState extends State {
 	private BitmapFont font;
 	private OrthographicCamera camera;
-	private OrthographicCamera backgroundCamera;
 	private OrthographicCamera box2dCamera;
 
 	private EntityArrayList entities;
 	private Box2DDebugRenderer b2dRenderer;
 	private boolean debug = false;
 	private int level;
-	private Texture background;
 
 	public PlayState(GameStateManager gsm, int level) {
 		super(gsm);
@@ -56,7 +53,6 @@ public class PlayState extends State {
 		GameInfo.setLevel(level);
 
 		createCameras();
-		createBackground();
 		createEntities();
 	}
 
@@ -86,9 +82,6 @@ public class PlayState extends State {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.setProjectionMatrix(backgroundCamera.combined);
-		batch.draw(background, 0, 0);
-
 		batch.setProjectionMatrix(camera.combined);
 		entities.renderAll(batch);
 
@@ -131,9 +124,6 @@ public class PlayState extends State {
 
 		box2dCamera = new OrthographicCamera();
 		box2dCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH / Breakthrough.PIXELS_PER_METER, Breakthrough.VIRTUAL_HEIGHT / Breakthrough.PIXELS_PER_METER);
-
-		backgroundCamera = new OrthographicCamera();
-		backgroundCamera.setToOrtho(false, Breakthrough.VIRTUAL_WIDTH, Breakthrough.VIRTUAL_HEIGHT);
 	}
 
 	/**
@@ -151,26 +141,14 @@ public class PlayState extends State {
 
 	}
 
-	private void createBackground() {
-		int random = MathUtils.random(3) + 1;
-
-		if (random == 1) {
-			background = TextureManager.getTexture("background1");
-		}
-		if (random == 2) {
-			background = TextureManager.getTexture("background2");
-		}
-		if (random == 3) {
-			background = TextureManager.getTexture("background3");
-		}
-		if (random == 4) {
-			background = TextureManager.getTexture("background4");
-		}
-	}
-
 	private void createPaddle() {
-		Sprite sprite = new Sprite(TextureManager.getTexture("paddle"));
-		entities.add(EntityFactory.createPaddle("paddle", sprite, Breakthrough.VIRTUAL_WIDTH / 2, 40));
+		Sprite frame0 = new Sprite(TextureManager.getTexture("paddle00"));
+		Sprite frame1 = new Sprite(TextureManager.getTexture("paddle01"));
+
+		Array<Sprite> animation = new Array<Sprite>();
+		animation.addAll(frame0, frame1);
+
+		entities.add(EntityFactory.createPaddle("paddle", frame0, animation, .30f, Breakthrough.VIRTUAL_WIDTH / 2, 40));
 	}
 
 	private void createBall() {
@@ -179,8 +157,8 @@ public class PlayState extends State {
 	}
 
 	private void createBlocks() {
-		float width = TextureManager.getTexture("block").getWidth();
-		float height = TextureManager.getTexture("block").getHeight();
+		float width = TextureManager.getTexture("block00").getWidth();
+		float height = TextureManager.getTexture("block00").getHeight();
 		MapBuilder.buildLevelMap("level" + level + ".map", entities, (0 + width / 2) + width / 2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
 	}
 

@@ -3,7 +3,7 @@ package com.littlebandit.breakthrough.gameutilities.managers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
-import com.littlebandit.breakthrough.gameutilities.Link;
+import com.littlebandit.breakthrough.entities.entityutilities.Link;
 
 /**
  * Game manager utility class. Holds game objects.

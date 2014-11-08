@@ -2,7 +2,7 @@ package com.littlebandit.breakthrough.entities.playstate.components.updatecompon
 
 import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.UpdateComponent;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.ScaleTween;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.AnimationScaleTween;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.Tween;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticStrategy;
@@ -14,7 +14,7 @@ import com.littlebandit.breakthrough.gameutilities.math.easestrategies.ElasticSt
  *
  */
 public class PaddleCollision implements UpdateComponent {
-	private Tween scaleTween = new ScaleTween(0, 1.5f, 1, 1.5f, EaseDirection.EASE_OUT, new ElasticStrategy());
+	private Tween scaleTween = new AnimationScaleTween(0, 1.5f, 1, 1.5f, EaseDirection.EASE_OUT, new ElasticStrategy());
 
 	@Override
 	public void update(Entity entity) {

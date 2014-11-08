@@ -2,8 +2,8 @@ package com.littlebandit.breakthrough.entities.splashscreenstate;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.littlebandit.breakthrough.entities.SimpleEntity;
+import com.littlebandit.breakthrough.entities.entityutilities.Link;
 import com.littlebandit.breakthrough.entities.splashscreenstate.components.updatecomponents.SplashFadeInOutUpdateComponent;
-import com.littlebandit.breakthrough.gameutilities.Link;
 
 /**
  * LittleBandit splash screen entity. Implements the link interface.

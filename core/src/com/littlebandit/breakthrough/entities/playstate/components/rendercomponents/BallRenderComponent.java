@@ -17,6 +17,7 @@ public class BallRenderComponent implements RenderComponent {
 	@Override
 	public void render(Entity entity, SpriteBatch batch) {
 		entity.getSprite().draw(batch);
+		
 		if (ParticleManager.doRenderTrail()) {
 			ParticleManager.getParticleEffect("trail").draw(batch);
 		}

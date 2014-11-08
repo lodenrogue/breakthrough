@@ -1,4 +1,4 @@
-package com.littlebandit.breakthrough.gameutilities;
+package com.littlebandit.breakthrough.entities.entityutilities;
 
 public interface Link {
 	
