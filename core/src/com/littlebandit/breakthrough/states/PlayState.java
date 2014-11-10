@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.Breakthrough;
+import com.littlebandit.breakthrough.entities.Camera;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
-import com.littlebandit.breakthrough.entities.playstate.Camera;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
 import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.managers.GameStateManager;
@@ -145,13 +145,13 @@ public class PlayState extends State {
 	}
 
 	private void createPaddle() {
-		Sprite frame0 = new Sprite(TextureManager.getTexture("paddle00"));
-		Sprite frame1 = new Sprite(TextureManager.getTexture("paddle01"));
+		Sprite frame1 = new Sprite(TextureManager.getTexture("paddle00"));
+		Sprite frame2 = new Sprite(TextureManager.getTexture("paddle01"));
 
 		Array<Sprite> animation = new Array<Sprite>();
-		animation.addAll(frame0, frame1);
+		animation.addAll(frame1, frame2);
 
-		entities.add(EntityFactory.createPaddle("paddle", frame0, animation, .30f, Breakthrough.VIRTUAL_WIDTH / 2, 40));
+		entities.add(EntityFactory.createPaddle("paddle", frame1, animation, .30f, Breakthrough.VIRTUAL_WIDTH / 2, 40));
 	}
 
 	private void createBall() {
