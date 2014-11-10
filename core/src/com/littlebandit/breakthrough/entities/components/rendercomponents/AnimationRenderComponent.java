@@ -41,8 +41,8 @@ public class AnimationRenderComponent implements RenderComponent {
 		// if the state time is greater than or equal to the frame
 		// duration increase the frame and reset the state time
 		if (stateTime >= frameDuration) {
-			stateTime = 0;
 			currentFrame++;
+			stateTime = 0;
 
 			// if the current frame index is higher than the number
 			// of frames, reset the current frame index

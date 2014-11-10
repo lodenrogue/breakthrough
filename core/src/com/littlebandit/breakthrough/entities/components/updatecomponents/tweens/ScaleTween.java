@@ -32,7 +32,7 @@ public class ScaleTween extends Tween {
 				entity.getSprite().setScale(scale);
 				currentTime += Gdx.graphics.getDeltaTime();
 			}
-			if (currentTime >= endTime) {
+			else {
 				entity.getSprite().setScale(endValue);
 				doTween = false;
 			}

@@ -16,5 +16,4 @@ public class EmptyRenderComponent implements RenderComponent {
 	public void render(Entity entity, SpriteBatch batch) {
 
 	}
-
 }

@@ -31,7 +31,7 @@ public class AlphaTween extends Tween {
 				entity.getSprite().setAlpha(alpha);
 				currentTime += Gdx.graphics.getDeltaTime();
 			}
-			if (currentTime >= endTime) {
+			else {
 				entity.getSprite().setAlpha(endValue);
 				doTween = false;
 			}

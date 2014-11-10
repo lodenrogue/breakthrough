@@ -34,14 +34,12 @@ public class AnimationScaleTween extends Tween {
 				}
 				currentTime += Gdx.graphics.getDeltaTime();
 			}
-			if (currentTime >= endTime) {
+			else {
 				for (Sprite s : sprites) {
 					s.setScale(endValue);
 					doTween = false;
 				}
 			}
 		}
-
 	}
-
 }

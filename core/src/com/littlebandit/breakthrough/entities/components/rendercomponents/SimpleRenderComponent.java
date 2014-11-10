@@ -16,5 +16,4 @@ public class SimpleRenderComponent implements RenderComponent {
 	public void render(Entity entity, SpriteBatch batch) {
 		entity.getSprite().draw(batch);
 	}
-
 }

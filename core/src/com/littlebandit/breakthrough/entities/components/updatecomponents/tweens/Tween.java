@@ -35,6 +35,16 @@ public abstract class Tween implements UpdateComponent {
 		easeStrategy = strategy;
 	}
 
+	/**
+	 * Constructor for multi-value easing, like position.
+	 * 
+	 * @param startTime
+	 * @param beginPosition
+	 * @param endPosition
+	 * @param endTime
+	 * @param direction
+	 * @param strategy
+	 */
 	public Tween(float startTime, Vector2 beginPosition, Vector2 endPosition, float endTime, EaseDirection direction, SimpleEaseStrategy strategy) {
 		this.startTime = startTime;
 		this.currentTime = startTime;

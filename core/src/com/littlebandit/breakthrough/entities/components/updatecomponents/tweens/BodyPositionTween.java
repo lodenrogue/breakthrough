@@ -40,7 +40,7 @@ public class BodyPositionTween extends Tween {
 				entity.getBody().setTransform(newX, newY, entity.getBody().getAngle());
 				currentTime += Gdx.graphics.getDeltaTime();
 			}
-			if (currentTime >= endTime) {
+			else {
 				entity.getBody().setTransform(endPosition, entity.getBody().getAngle());
 				doTween = false;
 			}

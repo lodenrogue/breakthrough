@@ -48,6 +48,7 @@ public class PlayState extends State {
 		b2dRenderer = new Box2DDebugRenderer();
 
 		// Make sure to reset all game info on creation
+
 		// GameInfo.setScore(0);
 		GameInfo.setPlayerLives(3);
 		GameInfo.setLevel(level);
@@ -58,40 +59,42 @@ public class PlayState extends State {
 
 	@Override
 	public void update() {
+		// logic updates
 		entities.updateAll();
 		WorldManager.updateWorld();
 		camera.update();
 
+		// debug camera update
 		if (debug) {
 			box2dCamera.update();
 		}
 
-		handleEndOfLevel();
-
 		// If we have zero lives we go to game over!
 		if (GameInfo.getPlayerLives() == 0) {
-			// GAME OVER!
 			gsm.popAndPush(new GameOverState(gsm));
 		}
 
+		// If R is pressed restart the level
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			GameInfo.setIsLevelReadyToStart(false);
 			gsm.popAndPush(new PlayState(gsm, level));
 		}
+
+		handleEndOfLevel();
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
+		// Render all entities
 		batch.setProjectionMatrix(camera.combined);
 		entities.renderAll(batch);
 
+		// Draw all text
 		font.draw(batch, "Level: " + level, Breakthrough.VIRTUAL_WIDTH / 2 - 100, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Score: " + GameInfo.getScore(), Breakthrough.VIRTUAL_WIDTH / 2, Breakthrough.VIRTUAL_HEIGHT - 20);
 		font.draw(batch, "Lives: " + GameInfo.getPlayerLives(), Breakthrough.VIRTUAL_WIDTH / 2 + 100, Breakthrough.VIRTUAL_HEIGHT - 20);
-		// font.drawMultiLine(batch, "Debug Mode:\nFPS: " +
-		// Gdx.graphics.getFramesPerSecond() +
-		// "\nKeys: Space to start. \nR to reset level.", 10, 200);
 
+		// show debug renderer
 		if (debug) {
 			batch.setProjectionMatrix(box2dCamera.combined);
 			b2dRenderer.render(WorldManager.getWorld(), box2dCamera.combined);
@@ -159,7 +162,7 @@ public class PlayState extends State {
 	private void createBlocks() {
 		float width = TextureManager.getTexture("block00").getWidth();
 		float height = TextureManager.getTexture("block00").getHeight();
-		MapBuilder.buildLevelMap("level" + level + ".map", entities, (0 + width / 2) + width / 2, Breakthrough.VIRTUAL_HEIGHT - height, width + 10, height + 10);
+		MapBuilder.buildLevelMap("level" + level + ".map", entities, Breakthrough.VIRTUAL_WIDTH / 11 + width, Breakthrough.VIRTUAL_HEIGHT - height * 3, width, height);
 	}
 
 	private void createScreenBounds() {
