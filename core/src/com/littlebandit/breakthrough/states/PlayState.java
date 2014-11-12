@@ -162,7 +162,7 @@ public class PlayState extends State {
 	private void createBlocks() {
 		float width = TextureManager.getTexture("block00").getWidth();
 		float height = TextureManager.getTexture("block00").getHeight();
-		MapBuilder.buildLevelMap("level" + level + ".map", entities, Breakthrough.VIRTUAL_WIDTH / 11 + width, Breakthrough.VIRTUAL_HEIGHT - height * 3, width, height);
+		MapBuilder.buildLevelMap("level" + level + ".map", entities, width + 40, Breakthrough.VIRTUAL_HEIGHT - height * 3, width, height);
 	}
 
 	private void createScreenBounds() {
