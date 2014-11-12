@@ -15,7 +15,6 @@ public class BlockUpdateComponent implements UpdateComponent {
 	private UpdateComponent startLevel = new BlockStartLevel();
 	private UpdateComponent position = new PositionUpdateComponent();
 	private UpdateComponent debug = new DebugUpdateComponent();
-	// private UpdateComponent ease = new BlockEase();
 
 	private UpdateComponent collision = new BlockCollision();
 
@@ -23,7 +22,6 @@ public class BlockUpdateComponent implements UpdateComponent {
 	public void update(Entity entity) {
 		startLevel.update(entity);
 		position.update(entity);
-		// ease.update(entity);
 		collision.update(entity);
 		debug.update(entity);
 
