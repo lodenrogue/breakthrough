@@ -1,5 +1,0 @@
-breakout_sprites(no shadow)_5.png
-newBall.png
-newPaddle.png
-
-All under CC0 public domain license
