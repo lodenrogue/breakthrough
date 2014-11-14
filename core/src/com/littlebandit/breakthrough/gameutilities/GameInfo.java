@@ -13,15 +13,27 @@ public class GameInfo {
 	private static boolean isLevelReadyToStart = false;
 	private static int level = 1;
 	private static long score = 0;
+        private static long levelScore = 0;
 	private static int playerLives = 3;
 
 	/**
 	 * Create a new game info object
 	 */
 	private GameInfo() {
-
+            
 	}
 
+        /**
+         * Reset all game information to the defaults
+         */
+        public static void resetGameInfo()
+        {
+            level = 1;
+            score = 0;
+            levelScore = 0;
+            playerLives = 3;
+        }
+        
 	public static void setLevel(int level) {
 		GameInfo.level = level;
 	}
@@ -44,13 +56,22 @@ public class GameInfo {
 	public static long getScore() {
 		return score;
 	}
+        
+        public static long getLevelScore() {
+		return levelScore;
+	}
 
 	public static void setScore(long score) {
 		GameInfo.score = score;
 	}
+        
+        public static void setLevelScore(long score) {
+		GameInfo.levelScore = score;
+	}
 
 	public static void addScore(long number) {
-		score += number;
+		score       += number;
+                levelScore  += number;
 	}
 
 	public static int getPlayerLives() {

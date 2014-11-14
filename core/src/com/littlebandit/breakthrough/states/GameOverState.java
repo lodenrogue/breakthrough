@@ -33,6 +33,7 @@ public class GameOverState extends State {
 
 		// Wait for the player to press any key to reset the game
 		if (Gdx.input.isKeyPressed(Keys.ANY_KEY) || Gdx.input.isTouched()) {
+                        GameInfo.resetGameInfo();
 			gsm.popAndPush(new MenuState(gsm));
 			GameInfo.setIsLevelReadyToStart(false);
 		}

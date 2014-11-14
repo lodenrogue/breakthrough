@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Camera;
+import com.littlebandit.breakthrough.entities.*;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
@@ -46,11 +47,7 @@ public class PlayState extends State {
 	public void create() {
 		font = new BitmapFont();
 		b2dRenderer = new Box2DDebugRenderer();
-
-		// Make sure to reset all game info on creation
-
-		// GameInfo.setScore(0);
-		GameInfo.setPlayerLives(3);
+                
 		GameInfo.setLevel(level);
 
 		createCameras();
@@ -78,6 +75,17 @@ public class PlayState extends State {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			GameInfo.setIsLevelReadyToStart(false);
 			gsm.popAndPush(new PlayState(gsm, level));
+		}
+                
+                // If D is pressed destroy all blocks in the game to trigger level complete for testing
+		if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+			for (Entity e : entities)
+                        {
+                            if (e instanceof Block)
+                            {
+                                e.dispose();
+                            }
+                        }
 		}
 
 		handleEndOfLevel();
@@ -185,10 +193,13 @@ public class PlayState extends State {
 			if (Gdx.files.internal("level" + nextLevel + ".map").exists()) {
 				GameInfo.setLevel(nextLevel);
 				GameInfo.setIsLevelReadyToStart(false);
-				gsm.popAndPush(new PlayState(gsm, nextLevel));
+				gsm.popAndPush(new LevelCompleteState(gsm));
 			}
 			else {
-				gsm.popAndPush(new MenuState(gsm));
+                            // Clear out game info and start over at the menu
+                            GameInfo.resetGameInfo();
+                            GameInfo.setIsLevelReadyToStart(false);
+                            gsm.popAndPush(new MenuState(gsm));
 			}
 
 		}
