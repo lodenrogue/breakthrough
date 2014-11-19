@@ -1,9 +1,7 @@
 package com.littlebandit.breakthrough.gameutilities.managers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
-import com.littlebandit.breakthrough.entities.entityutilities.Link;
 
 /**
  * Game manager utility class. Holds game objects.
@@ -16,73 +14,9 @@ public class GameManager {
 	private static GameStateManager gsm;
 	private static OrthographicCamera camera;
 	private static EntityArrayList entities;
-	private static Array<Link> links;
-	private static int currentLink = 0;
 
 	private GameManager() {
 
-	}
-
-	/**
-	 * Sets the Link objects array.
-	 * 
-	 * @param links
-	 */
-	public static void setLinksArray(Array<Link> links) {
-		GameManager.links = links;
-	}
-
-	/**
-	 * Adds a link to the array.
-	 * 
-	 * @param link
-	 */
-	public static void addLink(Link link) {
-		links.add(link);
-	}
-
-	/**
-	 * Returns the current link.
-	 * 
-	 * @return
-	 */
-	public static Link getLink() {
-		return links.get(currentLink);
-	}
-
-	/**
-	 * Returns the next link or null if there is none.
-	 * 
-	 * @return
-	 */
-	public static Link getNextLink() {
-		if (currentLink + 1 < links.size) {
-			currentLink++;
-			return links.get(currentLink);
-		}
-		return null;
-	}
-
-	/**
-	 * Returns the previous link or null if there is none.
-	 * 
-	 * @return
-	 */
-	public static Link getPreviousLink() {
-		if (currentLink - 1 >= 0) {
-			currentLink--;
-			return links.get(currentLink);
-		}
-		return null;
-	}
-
-	/**
-	 * Returns the links array.
-	 * 
-	 * @return
-	 */
-	public static Array<Link> getLinks() {
-		return links;
 	}
 
 	/**

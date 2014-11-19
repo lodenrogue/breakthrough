@@ -9,8 +9,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.Breakthrough;
-import com.littlebandit.breakthrough.entities.Camera;
-import com.littlebandit.breakthrough.entities.*;
+import com.littlebandit.breakthrough.entities.BaseEntity;
+import com.littlebandit.breakthrough.entities.Entity;
+import com.littlebandit.breakthrough.entities.components.rendercomponents.EmptyRenderComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.cameracomponents.CameraUpdateComponent;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.gameutilities.GameInfo;
@@ -81,7 +83,7 @@ public class PlayState extends State {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
 			for (Entity e : entities)
                         {
-                            if (e instanceof Block)
+                            if (e.getId().contains("block"))
                             {
                                 e.dispose();
                             }
@@ -178,7 +180,10 @@ public class PlayState extends State {
 	}
 
 	private void createCameraEntity() {
-		entities.add(new Camera("camera", null, 0, 0));
+		Entity camera = new BaseEntity("camera", null, 0, 0);
+		camera.setRenderComponent(new EmptyRenderComponent());
+		camera.setUpdateComponent(new CameraUpdateComponent());
+		entities.add(camera);
 	}
 
 	private void handleEndOfLevel() {

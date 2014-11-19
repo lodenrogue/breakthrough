@@ -6,6 +6,10 @@ public interface Link {
 	
 	public boolean isReadyToStart();
 	
-	public void startNext(Link link);
+	public void startNextLink();
+	
+	public void addLink(Link link);
+	
+	public Link getLink();
 
 }

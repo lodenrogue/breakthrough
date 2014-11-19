@@ -12,14 +12,18 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.utils.Array;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Ball;
-import com.littlebandit.breakthrough.entities.Block;
+import com.littlebandit.breakthrough.entities.BaseEntity;
 import com.littlebandit.breakthrough.entities.Entity;
-import com.littlebandit.breakthrough.entities.LittleBanditSplash;
+import com.littlebandit.breakthrough.entities.LinkEntity;
 import com.littlebandit.breakthrough.entities.Paddle;
-import com.littlebandit.breakthrough.entities.ScreenBounds;
-import com.littlebandit.breakthrough.entities.Title;
+import com.littlebandit.breakthrough.entities.components.rendercomponents.AnimationRenderComponent;
+import com.littlebandit.breakthrough.entities.components.rendercomponents.EmptyRenderComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.SplashFadeInOutUpdateComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.SplashFadeInUpdateComponent;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.ballcomponents.BallVelocity;
-import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.blockcomponents.BlockUpdateComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.boundscomponents.BoundsUpdateComponent;
+import com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents.PaddleUpdateComponent;
 import com.littlebandit.breakthrough.gameutilities.managers.WorldManager;
 
 /**
@@ -55,6 +59,8 @@ public class EntityFactory {
 
 	public static Entity createPaddle(String id, Sprite sprite, Array<Sprite> animation, float frameDuration, float x, float y) {
 		Entity e = new Paddle(id, sprite, animation, frameDuration, x, y);
+		e.setUpdateComponent(new PaddleUpdateComponent());
+		e.setRenderComponent(new AnimationRenderComponent());
 
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
@@ -70,7 +76,8 @@ public class EntityFactory {
 	}
 
 	public static Entity createBlock(String id, Sprite sprite, float x, float y) {
-		Block e = new Block(id, sprite, x, y);
+		Entity e = new BaseEntity(id, sprite, x, y);
+		e.setUpdateComponent(new BlockUpdateComponent());
 
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.getWidth() / 2 / ppm, sprite.getHeight() / 2 / ppm);
@@ -86,7 +93,10 @@ public class EntityFactory {
 	}
 
 	public static Entity createScreenBounds(String id, Sprite sprite, float x, float y) {
-		Entity e = new ScreenBounds(id, sprite, x, y);
+		Entity e = new BaseEntity(id, sprite, x, y);
+		e.setRenderComponent(new EmptyRenderComponent());
+		e.setUpdateComponent(new BoundsUpdateComponent());
+
 		EdgeShape es = new EdgeShape();
 
 		float rightX = Breakthrough.VIRTUAL_WIDTH / ppm;
@@ -149,15 +159,15 @@ public class EntityFactory {
 		return fixtureDef;
 	}
 
-	public static Entity createTitle(String id, Sprite sprite, float x, float y) {
-		Entity e = new Title(id, sprite, x, y);
-		GameManager.addLink((Link) e);
+	public static LinkEntity createTitle(String id, Sprite sprite, float x, float y) {
+		LinkEntity e = new LinkEntity(id, sprite, x, y);
+		e.setUpdateComponent(new SplashFadeInUpdateComponent());
 		return e;
 	}
 
-	public static Entity createLittleBanditSplash(String id, Sprite sprite, float x, float y) {
-		Entity e = new LittleBanditSplash(id, sprite, x, y);
-		GameManager.addLink((Link) e);
+	public static LinkEntity createLittleBanditSplash(String id, Sprite sprite, float x, float y) {
+		LinkEntity e = new LinkEntity(id, sprite, x, y);
+		e.setUpdateComponent(new SplashFadeInOutUpdateComponent());
 		return e;
 	}
 }

@@ -5,10 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.littlebandit.breakthrough.Breakthrough;
 import com.littlebandit.breakthrough.entities.Entity;
+import com.littlebandit.breakthrough.entities.LinkEntity;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityArrayList;
 import com.littlebandit.breakthrough.entities.entityutilities.EntityFactory;
 import com.littlebandit.breakthrough.entities.entityutilities.Link;
@@ -74,17 +74,19 @@ public class SplashScreenState extends State {
 	private void createEntities() {
 		entities = new EntityArrayList();
 		GameManager.setEntityArrayList(entities);
-		GameManager.setLinksArray(new Array<Link>());
 
-		createLittleBanditSplash();
 		createTitle();
+		createLittleBanditSplash();
+
 	}
 
 	private void createLittleBanditSplash() {
 		Sprite sprite = new Sprite(TextureManager.getTexture("littlebanditlogo"));
-		Entity littleBanditSplash = EntityFactory.createLittleBanditSplash("littlebanditsplash", sprite, 0, 0);
-		entities.add(littleBanditSplash);
+		LinkEntity littleBanditSplash = EntityFactory.createLittleBanditSplash("littlebanditsplash", sprite, 0, 0);
 		littleBanditSplash.getSprite().setAlpha(0);
+		littleBanditSplash.addLink((Link) entities.getEntityById("title"));
+
+		entities.add(littleBanditSplash);
 
 		Link link = (Link) littleBanditSplash;
 		link.start();

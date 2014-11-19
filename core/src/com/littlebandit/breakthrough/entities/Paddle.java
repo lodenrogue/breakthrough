@@ -2,8 +2,6 @@ package com.littlebandit.breakthrough.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
-import com.littlebandit.breakthrough.entities.components.rendercomponents.AnimationRenderComponent;
-import com.littlebandit.breakthrough.entities.components.updatecomponents.paddlecomponents.PaddleUpdateComponent;
 import com.littlebandit.breakthrough.entities.entityutilities.Animateable;
 
 /**
@@ -20,15 +18,10 @@ public class Paddle extends SimpleEntity implements Animateable {
 		super(id, sprite, x, y);
 		this.animation = animation;
 		this.frameDuration = frameDuration;
-		setUpdateComponent(new PaddleUpdateComponent());
-		setRenderComponent(new AnimationRenderComponent());
-
 	}
 
 	@Override
 	public void disposeAll() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void setAnimation(Array<Sprite> animaton, float frameDuration) {
@@ -57,5 +50,4 @@ public class Paddle extends SimpleEntity implements Animateable {
 	public float getAnimationDuration() {
 		return frameDuration;
 	}
-
 }

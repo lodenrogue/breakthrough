@@ -5,7 +5,6 @@ import com.littlebandit.breakthrough.entities.Entity;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.AlphaTween;
 import com.littlebandit.breakthrough.entities.components.updatecomponents.tweens.Tween;
 import com.littlebandit.breakthrough.entities.entityutilities.Link;
-import com.littlebandit.breakthrough.gameutilities.managers.GameManager;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.EaseDirection;
 import com.littlebandit.breakthrough.gameutilities.math.easestrategies.QuadStrategy;
 
@@ -46,7 +45,7 @@ public class SplashFadeInUpdateComponent implements UpdateComponent {
 			// if we've reached our target time then start the next
 			// link
 			if (currentTime >= fadeTime + 2.0f) {
-				link.startNext(GameManager.getNextLink());
+				link.startNextLink();
 			}
 		}
 	}
